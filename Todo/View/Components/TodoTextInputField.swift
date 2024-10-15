@@ -23,7 +23,7 @@ struct TodoTextInputField: View {
                     .foregroundColor(.text)
             }
             
-            TextField("Email", text: .constant(""))
+            TextField(hint, text: $text)
                 .font(.custom(Typeface.light, size: textSize))
                 .autocapitalization(autoCapitalization)
                 .keyboardType(keyboardType)

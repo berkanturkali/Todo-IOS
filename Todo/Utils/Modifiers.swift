@@ -1,31 +1,7 @@
 //
 
+import Foundation
 import SwiftUI
-
-struct LoginScreenContent: View {
-    var body: some View {
-        ZStack {
-            Color.background
-                .edgesIgnoringSafeArea(.all)
-            Text(LocalizedStrings.login)
-                .font(.custom(Typeface.extraBold, size: 40))
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                .padding(.horizontal, 32)
-                .padding(.top, 36)
-            
-            VStack(spacing: 24) {
-                EmailInputField(email: .constant(""))
-                PasswordInputField()
-                LoginButton()
-            }
-            .padding(.vertical, 32)
-            .modifier(BackgroundModifier())
-            .padding(.horizontal)
-            
-        }
-        .frame(maxHeight: .infinity, alignment: .top)
-    }
-}
 
 struct ShadowModifier: ViewModifier {
     
@@ -83,9 +59,4 @@ struct BackgroundModifier: ViewModifier {
                 )
             )
     }
-}
-
-
-#Preview {
-    LoginScreenContent()
 }

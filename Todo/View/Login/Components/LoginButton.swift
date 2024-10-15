@@ -3,32 +3,19 @@
 import SwiftUI
 
 struct LoginButton: View {
+    
+    let onButtonClick: () -> Void
+    
     var body: some View {
         Button(action: {
-            print("Button tapped!")
+            onButtonClick()
         }) {
             Text(LocalizedStrings.login)
                 .font(.custom(Typeface.semibold, size: 16))
                 .padding(.horizontal, 32)
                 .padding(.vertical, 12)
                 .cornerRadius(8)
-                .background(
-                    RoundedRectangle(
-                        cornerRadius: 10
-                    ).stroke(
-                        .gray,
-                        lineWidth: 2
-                    ).fill(
-                        Color.background
-                    )
-                    .modifier(
-                        ShadowModifier(
-                            x: 8,
-                            y: 8
-                        )
-                    )
-                    
-                )
+                .modifier(BackgroundModifier(radius: 10, shadowX: 8, shadowY: 8))
                 .foregroundColor(.text)
             
         }
@@ -38,5 +25,5 @@ struct LoginButton: View {
 
 
 #Preview {
-    LoginButton()
+    LoginButton(onButtonClick: {})
 }

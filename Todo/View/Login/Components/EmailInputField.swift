@@ -9,9 +9,7 @@ struct EmailInputField: View {
     var body: some View {
         TodoTextInputField(
             hint: LocalizedStrings.email,
-            text: .constant(
-                ""
-            ),
+            text: $email,
             image: "envelope"
         )
     }
