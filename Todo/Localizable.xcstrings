@@ -18,8 +18,42 @@
         }
       }
     },
+    "firstname" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ad"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Firstname"
+          }
+        }
+      }
+    },
     "Hello World" : {
 
+    },
+    "lastname" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soyad"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lastname"
+          }
+        }
+      }
     },
     "login" : {
       "extractionState" : "manual",
