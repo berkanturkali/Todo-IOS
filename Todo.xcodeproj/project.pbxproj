@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		EB60F97A2CBE33AE0077E638 /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EB60F9792CBE33AE0077E638 /* Development.xcconfig */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		EB5284AF2CBCA65F00A1B63D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		EB52849C2CBCA65E00A1B63D /* Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB5284AE2CBCA65F00A1B63D /* TodoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB5284B82CBCA65F00A1B63D /* TodoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB60F9792CBE33AE0077E638 /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -88,6 +93,7 @@
 		EB5284932CBCA65E00A1B63D = {
 			isa = PBXGroup;
 			children = (
+				EB60F9792CBE33AE0077E638 /* Development.xcconfig */,
 				EB52849E2CBCA65E00A1B63D /* Todo */,
 				EB5284B12CBCA65F00A1B63D /* TodoTests */,
 				EB5284BB2CBCA65F00A1B63D /* TodoUITests */,
@@ -226,6 +232,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB60F97A2CBE33AE0077E638 /* Development.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

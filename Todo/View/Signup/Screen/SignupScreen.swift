@@ -16,6 +16,7 @@ struct SignupScreen: View {
             password: $viewModel.password,
             onSignupButtonClick: viewModel.onSignupButtonClick
         )
+        .navigationBarBackButtonHidden()
     }
 }
 
