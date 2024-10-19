@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-
-    },
     "can_not_connected_to_host" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -105,9 +102,6 @@
           }
         }
       }
-    },
-    "Hello World" : {
-
     },
     "http_exception" : {
       "extractionState" : "manual",

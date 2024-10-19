@@ -6,10 +6,14 @@ struct TodoDialog: View {
     
     let message: String
     
+    let onOkayButtonClick: () -> Void
+    
     var body: some View {
         
         ZStack {
-            Color.background.opacity(0.5).ignoresSafeArea()
+            Color.background.opacity(0.9).ignoresSafeArea()
+                .blur(radius: 10)
+                .transition(.opacity)
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.gray)
                 .fill(Color.background)
@@ -18,13 +22,16 @@ struct TodoDialog: View {
                 .padding(.horizontal, 50)
                 .modifier(ShadowModifier(x: 8, y: 8))
                 .overlay {
-                    VStack(spacing: 8) {
+                    VStack(spacing: 12) {
                         Text(message)
                             .font(.custom(Typeface.medium, size: 14))
-                            .padding()
+                            .padding(.horizontal, 70)
+                            .frame(height: 50)
+                            .multilineTextAlignment(.center)
+                            .lineLimit(3)
                             .foregroundColor(Color.text)
                         
-                        RoundedRectangle(cornerRadius: 10)
+                        RoundedRectangle(cornerRadius: 8)
                             .stroke(Color.gray, lineWidth: 1)
                             .fill(Color.background)
                             .frame(width: 120, height: 30)
@@ -37,7 +44,7 @@ struct TodoDialog: View {
                                     .foregroundColor(Color.text)
                             }
                             .onTapGesture {
-                                
+                                onOkayButtonClick()
                             }
                     }
                 }
@@ -48,5 +55,17 @@ struct TodoDialog: View {
 }
 
 #Preview {
-    TodoDialog(message: LocalizedStrings.somethingWentWrong)
+    VStack {
+        TodoDialog(
+            message: LocalizedStrings.firstNameAndLastNameAreRequired,
+            onOkayButtonClick: {
+            }
+        )
+        
+        TodoDialog(
+            message: LocalizedStrings.somethingWentWrong,
+            onOkayButtonClick: {
+            }
+        )
+    }
 }

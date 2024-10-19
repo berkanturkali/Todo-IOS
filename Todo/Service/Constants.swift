@@ -5,5 +5,5 @@ import Foundation
 
 struct Constants {
     
-    static let baseUrl = Bundle.main.infoDictionary?["BASE_URL"] as? String ?? ""
+    static let baseUrl = ProcessInfo.processInfo.environment["BASE_URL"] ?? ""
 }

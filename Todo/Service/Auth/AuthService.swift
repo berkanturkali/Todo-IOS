@@ -21,19 +21,24 @@ struct AuthService {
         
         let endpoint = AuthServiceEndpoints.signup
         
+        print(endpoint)
+        
         guard let url = URL(string: endpoint) else {
             throw NetworkError.badURL(endpoint)
         }
         
         do {
             
-            let jsonBody = try? JSONEncoder().encode(body)
+            let jsonBody = try JSONEncoder().encode(body)
             
             var request = URLRequest(url: url)
             
             request.httpMethod = HttpMethod.POST.rawValue
             
             request.httpBody = jsonBody
+            
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
             
             let (data, response) = try await URLSession.shared.data(for: request)
             

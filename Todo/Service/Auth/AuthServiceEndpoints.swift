@@ -4,7 +4,9 @@ import Foundation
 
 struct AuthServiceEndpoints {
     
-    static let login = Constants.baseUrl + "login/"
+    private static let authPath = "auth/"
     
-    static let signup = Constants.baseUrl + "signup/"
+    static let login = Constants.baseUrl + authPath  + "login/"
+    
+    static let signup = Constants.baseUrl + authPath + "signup/"
 }

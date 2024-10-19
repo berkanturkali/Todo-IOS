@@ -2,6 +2,7 @@
 
 import Foundation
 
+@MainActor
 class SignupScreenViewModel: ObservableObject {
     
     @Published var firstName: String = ""
@@ -58,6 +59,7 @@ class SignupScreenViewModel: ObservableObject {
                 email: email,
                 password: password
             )
+            
             let response = try await authService.signup(body: body)
             
             signupResponse = response

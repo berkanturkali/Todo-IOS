@@ -10,6 +10,8 @@ struct SignupScreen: View {
         
         @State var showAlert = viewModel.errorMessage != nil
         
+        @State var showSuccessAlert = viewModel.signupResponse != nil
+        
         SignupScreenContent(
             firstName: $viewModel.firstName,
             lastName: $viewModel.lastName,
@@ -21,14 +23,17 @@ struct SignupScreen: View {
                 }
             }
         )
-        .alert(isPresented: $showAlert) {
-            Alert(
-                title: Text(""),
-                message: Text(viewModel.errorMessage!),
-                dismissButton: .default(Text(LocalizedStrings.okay)) {
+        .overlay {
+            if(showSuccessAlert) {
+                TodoDialog(message: viewModel.signupResponse!) {
+                    viewModel.signupResponse = nil
+                }
+            }
+            if(showAlert) {
+                TodoDialog(message: viewModel.errorMessage!) {
                     viewModel.errorMessage = nil
                 }
-            )
+            }
         }
         .navigationBarBackButtonHidden()
     }
