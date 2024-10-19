@@ -17,7 +17,7 @@ struct AuthService {
         
     }
     
-    func signup() async throws -> String {
+    func signup(body: SignupRequestModel) async throws -> String {
         
         let endpoint = AuthServiceEndpoints.signup
         
@@ -27,11 +27,23 @@ struct AuthService {
         
         do {
             
-            let (data, response) = try await URLSession.shared.data(from: url)
+            let jsonBody = try? JSONEncoder().encode(body)
+            
+            var request = URLRequest(url: url)
+            
+            request.httpMethod = HttpMethod.POST.rawValue
+            
+            request.httpBody = jsonBody
+            
+            let (data, response) = try await URLSession.shared.data(for: request)
             
             guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
                 let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 500
-                throw NetworkError.httpError(statusCode: statusCode)
+                if let errorMessage = extractErrorMessage(from: data) {
+                    throw NetworkError.httpError(statusCode: statusCode, localizedDesc: errorMessage)
+                } else {
+                    throw NetworkError.httpError(statusCode: statusCode, localizedDesc: LocalizedStrings.somethingWentWrong)
+                }
             }
             
             let decodedResponse = try JSONDecoder().decode(BaseResponse<NoData>.self, from: data)
@@ -47,7 +59,7 @@ struct AuthService {
                 case .timedOut:
                     throw NetworkError.timedOut
                 case .cannotFindHost:
-                    throw NetworkError.cannotConnectToHost
+                    throw NetworkError.cannotConnectToHost(endpoint)
                 default:
                     throw NetworkError.requestFailed(error.localizedDescription)
                 }
@@ -60,5 +72,14 @@ struct AuthService {
             
         }
         
+    }
+    
+    func extractErrorMessage(from data: Data) -> String? {
+        do {
+            let errorResponse = try JSONDecoder().decode(ErrorResponse.self, from: data)
+            return errorResponse.message
+        } catch {
+            return nil
+        }
     }
 }

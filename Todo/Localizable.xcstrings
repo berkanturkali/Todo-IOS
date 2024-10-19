@@ -1,6 +1,43 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
+    "can_not_connected_to_host" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Can not connected to host: %@"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hosta bağlanılamadı: %@"
+          }
+        }
+      }
+    },
+    "decoding_error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Something went wrong while decoding: %@"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Decode sırasında hata oluştu: %@"
+          }
+        }
+      }
+    },
     "email" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -18,6 +55,23 @@
         }
       }
     },
+    "email_is_not_valid" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email is not valid. Please provide a valid email."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lütfen geçerli bir email giriniz."
+          }
+        }
+      }
+    },
     "firstname" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -29,14 +83,65 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Firstname"
+          }
+        }
+      }
+    },
+    "firstname_lastname_are_required" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First name and last name are required. Please fill them in."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ad ve soyad zorunludur. Lütfen alanları doldurun."
           }
         }
       }
     },
     "Hello World" : {
 
+    },
+    "http_exception" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Something went wrong with the code: %d  and with the message: %@"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bir şeyler ters gitti. Hata kodu: %d, hata mesajı: %@"
+          }
+        }
+      }
+    },
+    "invalid_url" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid URL: %@"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geçersiz URL: %@"
+          }
+        }
+      }
     },
     "lastname" : {
       "extractionState" : "manual",
@@ -49,7 +154,7 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Lastname"
           }
         }
@@ -68,6 +173,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Giriş Yap"
+          }
+        }
+      }
+    },
+    "not_connected_to_internet" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not connected to internet.\\nCheck your connection please."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İnternete bağlanılamadı.\\nLütfen bağlantınızı kontrol ediniz."
+          }
+        }
+      }
+    },
+    "okay" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Okay"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tamam"
           }
         }
       }
@@ -106,6 +245,23 @@
         }
       }
     },
+    "password_is_not_valid" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password is not valid. Password must be at least 9 characters long."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parola geçerli değil. Parola en az 9 karakterden oluşmalıdır."
+          }
+        }
+      }
+    },
     "signup" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -119,6 +275,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kayıt Ol"
+          }
+        }
+      }
+    },
+    "something_went_wrong" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oops, something went wrong."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ups, bir şeyler ters gitti."
+          }
+        }
+      }
+    },
+    "timeout" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oops! The request timed out."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ups! İstek zaman aşımına uğradı."
           }
         }
       }

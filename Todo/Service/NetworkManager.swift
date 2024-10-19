@@ -5,27 +5,29 @@ import Foundation
 
 struct NetworkManager {
     
-    static func handleNetworkError(_ error : NetworkError) -> String {        
+    
+    static let shared = NetworkManager()
+    
+    private init() {}    
+    
+    func handleNetworkError(_ error : NetworkError) -> String {
         switch error {
         case .badURL(let url):
-            return url
+            return String(format: LocalizedStrings.invalidUrl, url)
         case .requestFailed(let errorDescription):
             return errorDescription
         case .decodingError(let error):
-            return "Decoding Error: \(error)"
-            
-        case .httpError(let code):
-            return "HTTP Error: \(code)"
+            return String(format: LocalizedStrings.decodingError, error.localizedDescription)
+        case .httpError(let code, let message):
+            return String(format: LocalizedStrings.somethingWentWrongWithTheCodeAndMessage, code, message)
         case .notConnectedToInternet:
-            return "Not Connected to Internet"
+            return LocalizedStrings.notConnectedToInternet
         case .timedOut:
-            return "Timed Out"
-        case .cannotFindHost:
-            return "Cannot Find Host"
-        case .cannotConnectToHost:
-            return "Cannot Connect to Host"
+            return LocalizedStrings.timeout
+        case .cannotConnectToHost(let host):
+            return String(format: LocalizedStrings.canNotConnectedToHost, host)
         case .unknownError:
-            return "Unknown Error"
+            return LocalizedStrings.somethingWentWrong
         }
     }
 }
