@@ -55,8 +55,11 @@ struct TodoDialog: View {
                                     withAnimation {
                                         dialogOffset = UIScreen.main.bounds.height
                                     }
-                                    isVisible = false
-                                    onOkayButtonClick()
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                        isVisible = false
+                                        onOkayButtonClick()
+                                    }
+                                    
                                 }
                             
                         }

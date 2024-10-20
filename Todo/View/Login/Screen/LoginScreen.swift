@@ -8,8 +8,6 @@ struct LoginScreen: View {
     
     var body: some View {
         
-        @State var showAlert = viewModel.errorMessage != nil
-        
         @State var showSuccessAlert = viewModel.loginResponse != nil
         
         NavigationStack {
@@ -22,13 +20,13 @@ struct LoginScreen: View {
                     }
                 }
             )
-            .blurOnAlert(isAlertVisible: showAlert)
+            .blurOnAlert(isAlertVisible: viewModel.showAlert)
             .overlay {
-                TodoDialog(message: viewModel.errorMessage ?? "", isVisible: $showAlert) {
+                TodoDialog(message: viewModel.errorMessage ?? "", isVisible: $viewModel.showAlert) {
                     viewModel.errorMessage = nil
                 }
             }
-  
+            
         }
     }
 }

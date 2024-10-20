@@ -8,10 +8,6 @@ struct SignupScreen: View {
     
     var body: some View {
         
-        @State var showAlert = viewModel.errorMessage != nil
-        
-        @State var showSignupResponseAlert = viewModel.signupResponse != nil
-        
         SignupScreenContent(
             firstName: $viewModel.firstName,
             lastName: $viewModel.lastName,
@@ -23,15 +19,13 @@ struct SignupScreen: View {
                 }
             }
         )
-       
-        .blurOnAlert(isAlertVisible: showAlert)
+        
+        .blurOnAlert(isAlertVisible: viewModel.showAlert)
         .overlay {
-            TodoDialog(message: viewModel.signupResponse ?? "", isVisible: $showSignupResponseAlert) {
-                viewModel.signupResponse = nil
-            }
-            
-            TodoDialog(message: viewModel.errorMessage ?? "", isVisible: $showAlert) {
-                viewModel.errorMessage = nil
+            TodoDialog(message: viewModel.messageWithCallback?.message ?? "", isVisible: $viewModel.showAlert) {
+                if let callback = viewModel.messageWithCallback?.callback {
+                    callback()
+                }
             }
         }
         .navigationBarBackButtonHidden()

@@ -1,6 +1,7 @@
 //
 
 import Foundation
+import Combine
 
 @MainActor
 class LoginScreenViewModel: ObservableObject {
@@ -10,25 +11,35 @@ class LoginScreenViewModel: ObservableObject {
     
     @Published var isLoading: Bool = false
     
+    @Published var showAlert: Bool = false
+    
     @Published var errorMessage: String? = nil
     
     @Published var loginResponse: LoginResponseModel? = nil
     
     private let authService = AuthService.shared
     
+    private var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        $errorMessage.map { $0 != nil }
+            .assign(to: \.showAlert, on: self)
+            .store(in: &cancellables)
+    }
+    
     
     func onLoginButtonClick() async {
         
         guard !isLoading else { return }
         
-        let emailIsValid = checkIfTheEmailIsValid()
+        let emailIsValid = EmailValidator.checkIfTheEmailIsValid(email: email)
         
         guard emailIsValid else {
             errorMessage = LocalizedStrings.emailIsNotValid
             return
         }
         
-        let passwordIsValid = checkIfThePasswordIsValid()
+        let passwordIsValid = PasswordValidator.checkIfThePasswordIsValid(password: password)
         
         guard passwordIsValid else {
             errorMessage = LocalizedStrings.passwordIsNotValid
@@ -53,18 +64,5 @@ class LoginScreenViewModel: ObservableObject {
         isLoading = false
         
     }
-    
-    
-    func checkIfTheEmailIsValid() -> Bool {
-        let emailRegex = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}$"
-        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-        return !email.isEmpty && emailPredicate.evaluate(with: email)
-    }
-    
-    func checkIfThePasswordIsValid() -> Bool {
-        return !password.isEmpty && password.count >= 8
-    }
-    
-    
     
 }
