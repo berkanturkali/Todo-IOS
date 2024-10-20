@@ -6,49 +6,73 @@ struct TodoDialog: View {
     
     let message: String
     
+    @Binding var isVisible: Bool
+    
     let onOkayButtonClick: () -> Void
     
+    @State private var dialogOffset: CGFloat = UIScreen.main.bounds.height
+    
     var body: some View {
-        
         ZStack {
-            Color.background.opacity(0.9).ignoresSafeArea()
-                .blur(radius: 10)
-                .transition(.opacity)
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.gray)
-                .fill(Color.background)
-                .frame(maxWidth: .infinity)
-                .frame(height: 140)
-                .padding(.horizontal, 50)
-                .modifier(ShadowModifier(x: 8, y: 8))
-                .overlay {
-                    VStack(spacing: 12) {
-                        Text(message)
-                            .font(.custom(Typeface.medium, size: 14))
-                            .padding(.horizontal, 70)
-                            .frame(height: 50)
-                            .multilineTextAlignment(.center)
-                            .lineLimit(3)
-                            .foregroundColor(Color.text)
-                        
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.gray, lineWidth: 1)
-                            .fill(Color.background)
-                            .frame(width: 120, height: 30)
-                            .modifier(ShadowModifier(x: 4, y: 3))
-                            .overlay {
-                                Text(LocalizedStrings.okay)
-                                    .font(.custom(Typeface.medium, size: 12))
-                                    .padding(.horizontal, 40)
-                                    .padding(.vertical, 10)
-                                    .foregroundColor(Color.text)
-                            }
-                            .onTapGesture {
-                                onOkayButtonClick()
-                            }
+            if isVisible {
+                
+                Color.background
+                    .opacity(
+                        0.8
+                    )
+                    .ignoresSafeArea()
+                
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.gray)
+                    .fill(Color.background)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 140)
+                    .padding(.horizontal, 50)
+                    .modifier(ShadowModifier(x: 8, y: 8))
+                    .overlay {
+                        VStack(spacing: 12) {
+                            Text(message)
+                                .font(.custom(Typeface.medium, size: 14))
+                                .padding(.horizontal, 70)
+                                .frame(height: 50)
+                                .multilineTextAlignment(.center)
+                                .lineLimit(3)
+                                .foregroundColor(Color.text)
+                            
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.gray, lineWidth: 1)
+                                .fill(Color.background)
+                                .frame(width: 120, height: 35)
+                                .modifier(ShadowModifier(x: 4, y: 3))
+                                .overlay {
+                                    Text(LocalizedStrings.okay)
+                                        .font(.custom(Typeface.medium, size: 12))
+                                        .padding(.horizontal, 40)
+                                        .padding(.vertical, 10)
+                                        .foregroundColor(Color.text)
+                                }
+                                .onTapGesture {
+                                    withAnimation {
+                                        dialogOffset = UIScreen.main.bounds.height
+                                        isVisible = false
+                                        onOkayButtonClick()
+                                    }
+                                    
+                                }
+                        }
                     }
-                }
-                .animation(.easeInOut, value: true)
+                    .offset(y: dialogOffset)
+                    .onAppear {
+                        withAnimation(.snappy) {
+                            dialogOffset = 0
+                        }
+                    }
+                    .onDisappear {
+                        withAnimation(.snappy) {
+                            dialogOffset = UIScreen.main.bounds.height
+                        }
+                    }
+            }
         }
         
     }
@@ -58,12 +82,14 @@ struct TodoDialog: View {
     VStack {
         TodoDialog(
             message: LocalizedStrings.firstNameAndLastNameAreRequired,
+            isVisible: .constant(true),
             onOkayButtonClick: {
             }
         )
         
         TodoDialog(
             message: LocalizedStrings.somethingWentWrong,
+            isVisible: .constant(true),
             onOkayButtonClick: {
             }
         )

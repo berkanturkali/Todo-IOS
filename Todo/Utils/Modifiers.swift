@@ -60,3 +60,25 @@ struct BackgroundModifier: ViewModifier {
             )
     }
 }
+
+struct BlurOnAlertModifier: ViewModifier {
+    var isAlertVisible: Bool
+    
+    var radius: CGFloat = 5
+    
+    func body(content: Content) -> some View {
+        
+        content.blur(radius: isAlertVisible ? radius : 0)
+    }
+}
+
+extension View {
+    func blurOnAlert(isAlertVisible: Bool, radius: CGFloat = 5) -> some View {
+        self.modifier(
+            BlurOnAlertModifier(
+                isAlertVisible: isAlertVisible,
+                radius: radius
+            )
+        )
+    }
+}

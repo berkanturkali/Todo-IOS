@@ -24,16 +24,16 @@ struct SignupScreen: View {
             }
         )
         .overlay {
-            if(showSuccessAlert) {
-                TodoDialog(message: viewModel.signupResponse!) {
-                    viewModel.signupResponse = nil
-                }
-            }
-            if(showAlert) {
-                TodoDialog(message: viewModel.errorMessage!) {
-                    viewModel.errorMessage = nil
-                }
-            }
+//            if(showSuccessAlert) {
+//                TodoDialog(message: viewModel.signupResponse!) {
+//                    viewModel.signupResponse = nil
+//                }
+//            }
+//            if(showAlert) {
+//                TodoDialog(message: viewModel.errorMessage!) {
+//                    viewModel.errorMessage = nil
+//                }
+//            }
         }
         .navigationBarBackButtonHidden()
     }

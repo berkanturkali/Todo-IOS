@@ -5,13 +5,28 @@ import Foundation
 
 struct AuthService {
     
+    private let networkManager = NetworkManager.shared
+    
     static let shared = AuthService()
     
     private init() {}
     
-    func login() {
+    func login(body: LoginRequestModel) async throws -> LoginResponseModel {
         
         let url = AuthServiceEndpoints.login
+        
+        do {
+            let response: BaseResponse<LoginResponseModel> = try await networkManager.request(
+                to: url,
+                method: HttpMethod.POST,
+                body: body,
+                responseType:BaseResponse<LoginResponseModel>.self
+            )
+            
+            return response.data!
+        } catch {
+            throw error
+        }
         
         
         
@@ -22,8 +37,8 @@ struct AuthService {
         let endpoint = AuthServiceEndpoints.signup
         
         do {
-                
-            let response: BaseResponse<NoData> = try await NetworkManager.shared.request(
+            
+            let response: BaseResponse<NoData> = try await networkManager.request(
                 to: endpoint,
                 method: HttpMethod.POST,
                 body: body,
@@ -32,9 +47,9 @@ struct AuthService {
             return response.message
             
         } catch  {
-                
+            
             throw error
         }
     }
-
+    
 }
