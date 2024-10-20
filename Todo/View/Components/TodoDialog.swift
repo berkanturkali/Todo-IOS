@@ -18,15 +18,15 @@ struct TodoDialog: View {
                 
                 Color.background
                     .opacity(
-                        0.8
+                        0.5
                     )
                     .ignoresSafeArea()
+                    .transition(.opacity)
                 
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.gray)
                     .fill(Color.background)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 140)
+                    .frame(height: 150)
                     .padding(.horizontal, 50)
                     .modifier(ShadowModifier(x: 8, y: 8))
                     .overlay {
@@ -34,7 +34,7 @@ struct TodoDialog: View {
                             Text(message)
                                 .font(.custom(Typeface.medium, size: 14))
                                 .padding(.horizontal, 70)
-                                .frame(height: 50)
+                                .fixedSize(horizontal: false, vertical: true)
                                 .multilineTextAlignment(.center)
                                 .lineLimit(3)
                                 .foregroundColor(Color.text)
@@ -54,11 +54,11 @@ struct TodoDialog: View {
                                 .onTapGesture {
                                     withAnimation {
                                         dialogOffset = UIScreen.main.bounds.height
-                                        isVisible = false
-                                        onOkayButtonClick()
                                     }
-                                    
+                                    isVisible = false
+                                    onOkayButtonClick()
                                 }
+                            
                         }
                     }
                     .offset(y: dialogOffset)
@@ -67,14 +67,10 @@ struct TodoDialog: View {
                             dialogOffset = 0
                         }
                     }
-                    .onDisappear {
-                        withAnimation(.snappy) {
-                            dialogOffset = UIScreen.main.bounds.height
-                        }
-                    }
             }
+            
         }
-        
+        .animation(.snappy, value: isVisible)
     }
 }
 

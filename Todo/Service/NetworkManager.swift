@@ -19,6 +19,7 @@ struct NetworkManager {
         case .decodingError(let error):
             return String(format: LocalizedStrings.decodingError, error.localizedDescription)
         case .httpError(let code, let message):
+            print("here")
             return String(format: LocalizedStrings.somethingWentWrongWithTheCodeAndMessage, code, message)
         case .notConnectedToInternet:
             return LocalizedStrings.notConnectedToInternet
@@ -63,6 +64,7 @@ struct NetworkManager {
                 } else {
                     throw NetworkError.httpError(statusCode: statusCode, localizedDesc: LocalizedStrings.somethingWentWrong)
                 }
+                
             }
             
             let decodedResponse = try JSONDecoder().decode(responseType, from: data)
@@ -70,24 +72,35 @@ struct NetworkManager {
             
             
         } catch let error {
-            switch error {
-            case let urlError as URLError:
-                switch urlError.code {
-                case .notConnectedToInternet:
-                    throw NetworkError.notConnectedToInternet
-                case .timedOut:
-                    throw NetworkError.timedOut
-                case .cannotFindHost:
-                    throw NetworkError.cannotConnectToHost(endpoint)
-                default:
-                    throw NetworkError.requestFailed(error.localizedDescription)
-                }
-                
-            case let decodingError as DecodingError:
-                throw NetworkError.decodingError(decodingError)
-            default:
-                throw NetworkError.unknownError
+            
+            if let networkError = error as? NetworkError {
+                throw networkError
             }
+            
+            throw mapError(error, endpoint: endpoint)
+        }
+    }
+    
+    private func mapError(_ error: Error, endpoint: String) -> NetworkError {
+        if let urlError = error as? URLError {
+            return mapURLError(urlError, endpoint: endpoint)
+        } else if let decodingError = error as? DecodingError {
+            return .decodingError(decodingError)
+        } else {
+            return .unknownError
+        }
+    }
+    
+    private func mapURLError(_ error: URLError, endpoint: String) -> NetworkError {
+        switch error.code {
+        case .notConnectedToInternet:
+            return .notConnectedToInternet
+        case .timedOut:
+            return .timedOut
+        case .cannotFindHost:
+            return .cannotConnectToHost(endpoint)
+        default:
+            return .requestFailed(error.localizedDescription)
         }
     }
     

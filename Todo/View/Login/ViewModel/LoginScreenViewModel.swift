@@ -2,7 +2,7 @@
 
 import Foundation
 
-
+@MainActor
 class LoginScreenViewModel: ObservableObject {
     
     @Published var email: String = ""
@@ -46,6 +46,7 @@ class LoginScreenViewModel: ObservableObject {
             
             loginResponse = response
         } catch {
+            print("error: \(error)")
             errorMessage = NetworkManager.shared.handleNetworkError(error as! NetworkError)
         }
         

@@ -12,8 +12,6 @@ struct LoginScreen: View {
         
         @State var showSuccessAlert = viewModel.loginResponse != nil
         
-        @State var blur: CGFloat = showAlert ? 5 : 0
-        
         NavigationStack {
             LoginScreenContent(
                 email: $viewModel.email,
