@@ -22,6 +22,8 @@ struct LocalizedStrings {
     static var emailIsNotValid: String { localizedString(for: "email_is_not_valid") }
     static var passwordIsNotValid: String { localizedString(for: "password_is_not_valid") }
     static var okay: String { localizedString(for: "okay") }
+    static var homeTabLabel: String { localizedString(for: "home_tab_label") }
+    static var profileTabLabel: String { localizedString(for: "profile_tab_label") }
     
     static func localizedString(for key: String) -> String {
         return NSLocalizedString(key, comment: "")

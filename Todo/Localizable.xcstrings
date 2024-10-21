@@ -103,6 +103,26 @@
         }
       }
     },
+    "Home" : {
+
+    },
+    "home_tab_label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ana Sayfa"
+          }
+        }
+      }
+    },
     "http_exception" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -252,6 +272,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Parola geçerli değil. Parola en az 9 karakterden oluşmalıdır."
+          }
+        }
+      }
+    },
+    "Profile" : {
+
+    },
+    "profile_tab_label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profile"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profil"
           }
         }
       }
