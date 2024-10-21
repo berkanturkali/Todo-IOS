@@ -27,7 +27,7 @@ struct BackgroundModifier: ViewModifier {
     var radius: CGFloat = 16
     var strokeColor: Color = .gray
     var strokeWidth: CGFloat = 2
-    var fill: Color = Color.background
+    var color: Color = Color.background
     
     var shadowX: CGFloat = 12
     var shadowY: CGFloat = 12
@@ -47,7 +47,7 @@ struct BackgroundModifier: ViewModifier {
                     lineWidth: strokeWidth
                 )
                 .fill(
-                    fill
+                    color
                 )
                 .modifier(
                     ShadowModifier(
