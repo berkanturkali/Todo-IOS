@@ -11,17 +11,21 @@ struct MainScreen: View {
         ZStack {
             Color.background.ignoresSafeArea()
             VStack {
-                Spacer()
+                
                 contentView(
                     for: selectedTab
                 )
-                Spacer()
-              
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .layoutPriority(1)
+                
+                Spacer(minLength: 0)
+                
                 TodoTabBar(
                     selectedTab: $selectedTab
                 )
-            
+                
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
     
@@ -30,13 +34,7 @@ struct MainScreen: View {
         for tab: TodoTab
     ) -> some View {
         switch tab {
-        case .home:
-            Text(
-                "Home"
-            )
-            .font(
-                .body
-            )
+        case .home: HomeScreen()
             
         case .profile:
             Text(
@@ -72,13 +70,13 @@ struct TodoTabBar : View {
         )
         .modifier(
             BackgroundModifier(
-                radius: 12,
+                radius: 20,
                 shadowX: 8,
                 shadowY: 8
             )
         )
         .padding()
-
+        
     }
 }
 

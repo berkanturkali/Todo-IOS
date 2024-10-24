@@ -24,6 +24,13 @@ struct LocalizedStrings {
     static var okay: String { localizedString(for: "okay") }
     static var homeTabLabel: String { localizedString(for: "home_tab_label") }
     static var profileTabLabel: String { localizedString(for: "profile_tab_label") }
+    static var all: String { localizedString(for: "all") }
+    static var work: String { localizedString(for: "work") }
+    static var music: String { localizedString(for: "music") }
+    static var travel: String { localizedString(for: "travel") }
+    static var study: String { localizedString(for: "study") }
+    static var home: String { localizedString(for: "home") }
+    static var shopping: String { localizedString(for: "shopping") }
     
     static func localizedString(for key: String) -> String {
         return NSLocalizedString(key, comment: "")

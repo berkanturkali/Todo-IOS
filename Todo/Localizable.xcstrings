@@ -1,6 +1,23 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "all" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hepsi"
+          }
+        }
+      }
+    },
     "can_not_connected_to_host" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -103,8 +120,22 @@
         }
       }
     },
-    "Home" : {
-
+    "home" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ev"
+          }
+        }
+      }
     },
     "home_tab_label" : {
       "extractionState" : "manual",
@@ -187,6 +218,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Giriş Yap"
+          }
+        }
+      }
+    },
+    "music" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Music"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Müzik"
           }
         }
       }
@@ -296,6 +344,23 @@
         }
       }
     },
+    "shopping" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shopping"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alışveriş"
+          }
+        }
+      }
+    },
     "signup" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -330,6 +395,23 @@
         }
       }
     },
+    "study" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Study"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Çalışma"
+          }
+        }
+      }
+    },
     "timeout" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -343,6 +425,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ups! İstek zaman aşımına uğradı."
+          }
+        }
+      }
+    },
+    "travel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Travel"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seyahat"
+          }
+        }
+      }
+    },
+    "work" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Work"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İş"
           }
         }
       }

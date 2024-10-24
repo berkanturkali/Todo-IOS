@@ -13,6 +13,7 @@ struct FilterCategoryItem: View {
         HStack {
             
             Image(systemName: icon)
+                .font(.callout)
             
             Text(name)
                 
