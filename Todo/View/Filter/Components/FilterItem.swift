@@ -12,7 +12,7 @@ struct FilterItem: View {
         HStack {
             Text(filter.title)
                 .font(.custom(Typeface.medium, size: 18))
-                .foregroundColor(.text)
+                .foregroundColor(isSelected ? .text : .text.opacity(0.5))
             
             Spacer()
             
@@ -22,8 +22,18 @@ struct FilterItem: View {
                     .foregroundColor(.text)
             }
         }
-        .padding()
-        .modifier(BackgroundModifier(radius: 16, shadowX: 4, shadowY: 4))        
+        .padding(.vertical, 14)
+        .padding(.horizontal)
+        .modifier(
+            BackgroundModifier(
+                radius: 24,
+                strokeWidth: isSelected ? 2 : 1,
+                color: isSelected ? .background : .background.opacity(0.95),
+                shadowX: isSelected ? 4 : 3,
+                shadowY: isSelected ? 4 : 3,
+                shadowColor: isSelected ? .darkShadow : .darkShadow.opacity(0.5)
+            )
+        )
     }
 }
 

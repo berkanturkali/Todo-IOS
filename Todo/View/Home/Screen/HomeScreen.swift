@@ -19,7 +19,7 @@ struct HomeScreen: View {
                     Image(systemName: "line.3.horizontal.decrease.circle")
                         .overlay(
                             Circle()
-                                .fill(Color.blue)
+                                .fill(Color.buttonSecondary)
                                 .frame(width: 10, height: 10)
                                 .offset(x: 10, y: -10)
                                 .opacity(viewModel.showBadgeOnTheFilterButton ? 1 : 0)

@@ -28,7 +28,7 @@ struct FilterTopBar: View {
                     
                     Image(systemName: "checkmark")
                         .font(.headline)
-                        .foregroundColor(isCheckMarkActive ? .accentColor : .text.opacity(0.5))
+                        .foregroundColor(isCheckMarkActive ? .text : .text.opacity(0.5))
                         .onTapGesture {
                             onCheckMarkTapped()
                             dismiss()

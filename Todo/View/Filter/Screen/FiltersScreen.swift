@@ -11,7 +11,7 @@ struct FiltersScreen: View {
     @State var isCheckMarkActive: Bool = false
     
     let onCheckMarkTapped: (Filter) -> Void
-
+    
     
     var body: some View {
         ZStack {
@@ -27,19 +27,25 @@ struct FiltersScreen: View {
                 )
                 .padding(.top, 24)
                 
-                VStack(spacing: 20) {
+                VStack(spacing: 4) {
                     ForEach(Filter.allCases, id: \.self) { filter in
                         FilterItem(
                             filter: filter,
                             isSelected: selectedFilter == filter
                         )
-                            .padding(.horizontal, 10)
-                            .onTapGesture {
-                                selectedFilter = filter
-                                isCheckMarkActive = selectedFilter != appliedFilter
-                            }
+                        .padding(.vertical, 8)
+                        .padding(.horizontal, selectedFilter == filter ? 30 : 0)
+                        .onTapGesture {
+                            selectedFilter = filter
+                            isCheckMarkActive = selectedFilter != appliedFilter
+                        }
+                        .scaleEffect(selectedFilter == filter ? 1.1 : 0.9)
+                        .animation(.easeInOut(duration: 0.15), value: selectedFilter)
+                        
                     }
+                    
                 }
+         
                 .frame(maxHeight: .infinity,alignment: .top)
             }
             .modifier(
