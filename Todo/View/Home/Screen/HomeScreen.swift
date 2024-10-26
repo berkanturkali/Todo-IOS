@@ -6,7 +6,10 @@ struct HomeScreen: View {
     
     let todos: [Todo]
     
+    @StateObject var viewModel = HomeScreenViewModel()
+    
     @State private var showFilterScreen = false
+    
     
     var body: some View {
         ZStack {
@@ -25,7 +28,12 @@ struct HomeScreen: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHStack {
                             ForEach(Category.allCases, id: \.self) { category in
-                                CategoryItem(icon: category.icon, name: category.title)
+                                CategoryItem(
+                                    category: category,
+                                    selected: viewModel.selectedCategory == category
+                                ) {
+                                    viewModel.selectedCategory = category
+                                }
                             }
                         }
                         .padding(.horizontal)
@@ -41,7 +49,10 @@ struct HomeScreen: View {
             }
         }
         .fullScreenCover(isPresented: $showFilterScreen) {
-            FiltersScreen()
+            FiltersScreen(
+                appliedFilter: viewModel.selectedFilter,
+                onCheckMarkTapped: viewModel.onCheckMarkTapped
+            )
         }
         
     }

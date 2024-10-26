@@ -4,9 +4,14 @@ import SwiftUI
 
 struct FiltersScreen: View {
     
-    @State var selectedFilter: Filter? = nil
+    let appliedFilter: Filter
+    
+    @State var selectedFilter: Filter = .all
     
     @State var isCheckMarkActive: Bool = false
+    
+    let onCheckMarkTapped: (Filter) -> Void
+
     
     var body: some View {
         ZStack {
@@ -14,31 +19,50 @@ struct FiltersScreen: View {
             Color.background.ignoresSafeArea()
             
             VStack(spacing: 24) {
-                FilterTopBar(isCheckMarkActive: $isCheckMarkActive)
-                    .padding(.top, 24)
+                FilterTopBar(
+                    isCheckMarkActive: $isCheckMarkActive,
+                    onCheckMarkTapped: {
+                        onCheckMarkTapped(selectedFilter)
+                    }
+                )
+                .padding(.top, 24)
                 
                 VStack(spacing: 20) {
                     ForEach(Filter.allCases, id: \.self) { filter in
-                        FilterItem(filter: filter, isSelected: selectedFilter == filter)
+                        FilterItem(
+                            filter: filter,
+                            isSelected: selectedFilter == filter
+                        )
                             .padding(.horizontal, 10)
                             .onTapGesture {
-                                isCheckMarkActive = selectedFilter != filter
-                                if(selectedFilter == filter) {
-                                    selectedFilter = nil
-                                    return
-                                }
                                 selectedFilter = filter
+                                isCheckMarkActive = selectedFilter != appliedFilter
                             }
                     }
                 }
                 .frame(maxHeight: .infinity,alignment: .top)
             }
-            .modifier(BackgroundModifier(shadowX: 4, shadowY: -6))
+            .modifier(
+                BackgroundModifier(
+                    strokeColor: .gray.opacity(
+                        0.5
+                    ),
+                    strokeWidth: 1,
+                    shadowX: 0,
+                    shadowY: 0
+                )
+            )
             .edgesIgnoringSafeArea(.bottom)
+        }
+        .onAppear {
+            selectedFilter = appliedFilter
         }
     }
 }
 
 #Preview {
-    FiltersScreen()
+    FiltersScreen(
+        appliedFilter: Filter.all,
+        onCheckMarkTapped: { _ in }
+    )
 }

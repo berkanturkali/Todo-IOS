@@ -4,18 +4,23 @@ import SwiftUI
 
 struct CategoryItem: View {
     
-    let icon: String
-    let name: String
+    let animationDuration = 0.1
     
-    var selected: Bool = true
+    let category: Category
+    
+    let selected: Bool
+    
+    let onItemClick: () -> Void
+
+    @State private var jumpOffset: CGFloat = 0
     
     var body: some View {
         HStack {
             
-            Image(systemName: icon)
+            Image(systemName: selected ? "checkmark" : category.icon)
                 .font(.callout)
             
-            Text(name)
+            Text(category.title)
             
         }
         .font(.custom(Typeface.medium, size: 14))
@@ -32,6 +37,21 @@ struct CategoryItem: View {
                 shadowColor: selected ? .darkShadow : .darkShadow.opacity(0.5)
             )
         )
+        .offset(y: jumpOffset)
+        .onTapGesture {
+ 
+            withAnimation(.snappy(duration: animationDuration)) {
+                jumpOffset = -5
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration) {
+                withAnimation(.easeIn(duration: animationDuration)) {
+                    jumpOffset = 0
+                }
+            }
+            
+            onItemClick()
+        }
         
     }
 }
@@ -39,10 +59,14 @@ struct CategoryItem: View {
 #Preview {
     HStack {
         CategoryItem(
-            icon: "bag.fill", name: "Work"
+            category: Category.work,
+            selected: true,
+            onItemClick: {}
         )
         CategoryItem(
-            icon: "bag.fill", name: "Work", selected: false
+            category: Category.work,
+            selected: false,
+            onItemClick: {}
         )
     }
 }

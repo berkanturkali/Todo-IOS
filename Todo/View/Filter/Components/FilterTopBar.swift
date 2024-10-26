@@ -8,6 +8,8 @@ struct FilterTopBar: View {
     
     @Binding var isCheckMarkActive: Bool
     
+    let onCheckMarkTapped: () -> Void
+    
     var body: some View {
         VStack(alignment: .center, spacing: 12) {
             ZStack {
@@ -27,6 +29,10 @@ struct FilterTopBar: View {
                     Image(systemName: "checkmark")
                         .font(.headline)
                         .foregroundColor(isCheckMarkActive ? .accentColor : .text.opacity(0.5))
+                        .onTapGesture {
+                            onCheckMarkTapped()
+                            dismiss()
+                        }
                     
                 }
                 .padding(.horizontal)
@@ -39,5 +45,5 @@ struct FilterTopBar: View {
 }
 
 #Preview {
-    FilterTopBar(isCheckMarkActive: .constant(false))
+    FilterTopBar(isCheckMarkActive: .constant(false), onCheckMarkTapped: {})
 }
