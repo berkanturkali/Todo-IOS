@@ -23,9 +23,7 @@ struct FilterItem: View {
             }
         }
         .padding()
-        .modifier(BackgroundModifier(radius: 24, shadowX: 4, shadowY: 4))
-        .padding(.horizontal)
-        
+        .modifier(BackgroundModifier(radius: 16, shadowX: 4, shadowY: 4))        
     }
 }
 
