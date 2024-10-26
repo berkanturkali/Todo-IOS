@@ -34,7 +34,9 @@ struct MainScreen: View {
         for tab: TodoTab
     ) -> some View {
         switch tab {
-        case .home: HomeScreen()
+        case .home: HomeScreen(todos: (1...100).map({ i in
+            Todo.mockTodo
+        }))
             
         case .profile:
             Text(

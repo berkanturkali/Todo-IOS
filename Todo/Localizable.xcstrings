@@ -35,6 +35,26 @@
         }
       }
     },
+    "cancel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "İptal"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+
+    },
     "decoding_error" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -82,6 +102,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lütfen geçerli bir email giriniz."
+          }
+        }
+      }
+    },
+    "filters" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filters"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtreler"
           }
         }
       }

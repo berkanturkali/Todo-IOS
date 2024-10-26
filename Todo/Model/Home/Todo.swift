@@ -2,7 +2,8 @@
 
 import Foundation
 
-struct Todo {
+struct Todo: Hashable, Codable {
+    let id: String
     let category: String
     let date: String
     let todo: String
@@ -15,6 +16,7 @@ struct Todo {
     
     static var mockTodo: Todo {
         return Todo(
+            id: UUID().uuidString,
             category: Category.all.title,
             date: "11:02",
             todo: "Get Married",
