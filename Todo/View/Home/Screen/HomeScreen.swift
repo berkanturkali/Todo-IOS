@@ -10,7 +10,7 @@ struct HomeScreen: View {
     
     var body: some View {
         ZStack {
-            Color.background.ignoresSafeArea()
+            Color.background.ignoresSafeArea(.all)
             ScrollView() {
                 LazyVStack {
                     Image(systemName: "line.3.horizontal.decrease.circle")
@@ -25,7 +25,7 @@ struct HomeScreen: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHStack {
                             ForEach(Category.allCases, id: \.self) { category in
-                                FilterCategoryItem(icon: category.icon, name: category.title)
+                                CategoryItem(icon: category.icon, name: category.title)
                             }
                         }
                         .padding(.horizontal)
@@ -34,15 +34,14 @@ struct HomeScreen: View {
                     
                     ForEach(todos, id: \.self) { todo in
                         TodoItem(todo: todo)
-                            .padding(.vertical, 12)
-                            .padding(.horizontal, 8)
+                            .padding(.vertical, 10)
+                            .padding(.horizontal, 2)
                     }
                 }
             }
-            
         }
-        .sheet(isPresented: $showFilterScreen) {
-                
+        .fullScreenCover(isPresented: $showFilterScreen) {
+            FiltersScreen()
         }
         
     }

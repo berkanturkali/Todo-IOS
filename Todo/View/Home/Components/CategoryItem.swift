@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-struct FilterCategoryItem: View {
+struct CategoryItem: View {
     
     let icon: String
     let name: String
@@ -16,7 +16,7 @@ struct FilterCategoryItem: View {
                 .font(.callout)
             
             Text(name)
-                
+            
         }
         .font(.custom(Typeface.medium, size: 14))
         .foregroundColor(selected ? .text : .text.opacity(0.5))
@@ -25,10 +25,11 @@ struct FilterCategoryItem: View {
         .modifier(
             BackgroundModifier(
                 radius: 32,
-                strokeWidth: selected ? 2 : 0,
-                color: selected ? .background : .white.opacity(0.9),
-                shadowX: selected ? 2 : 0,
-                shadowY: selected ? 2 : 0
+                strokeWidth: 2,
+                color: selected ? .background : .background.opacity(0.95),
+                shadowX: 2,
+                shadowY: 2,
+                shadowColor: selected ? .darkShadow : .darkShadow.opacity(0.5)
             )
         )
         
@@ -37,10 +38,10 @@ struct FilterCategoryItem: View {
 
 #Preview {
     HStack {
-        FilterCategoryItem(
+        CategoryItem(
             icon: "bag.fill", name: "Work"
         )
-        FilterCategoryItem(
+        CategoryItem(
             icon: "bag.fill", name: "Work", selected: false
         )
     }

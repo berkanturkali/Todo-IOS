@@ -10,11 +10,12 @@ struct FiltersScreen: View {
     
     var body: some View {
         ZStack {
+            
             Color.background.ignoresSafeArea()
             
             VStack(spacing: 24) {
                 FilterTopBar(isCheckMarkActive: $isCheckMarkActive)
-                    .padding(.top, 12)
+                    .padding(.top, 24)
                 
                 VStack(spacing: 20) {
                     ForEach(Filter.allCases, id: \.self) { filter in
@@ -32,6 +33,8 @@ struct FiltersScreen: View {
                 }
                 .frame(maxHeight: .infinity,alignment: .top)
             }
+            .modifier(BackgroundModifier(shadowX: 4, shadowY: -6))
+            .edgesIgnoringSafeArea(.bottom)
         }
     }
 }
