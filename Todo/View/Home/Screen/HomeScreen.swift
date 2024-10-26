@@ -17,12 +17,20 @@ struct HomeScreen: View {
             ScrollView() {
                 LazyVStack {
                     Image(systemName: "line.3.horizontal.decrease.circle")
+                        .overlay(
+                            Circle()
+                                .fill(Color.blue)
+                                .frame(width: 10, height: 10)
+                                .offset(x: 10, y: -10)
+                                .opacity(viewModel.showBadgeOnTheFilterButton ? 1 : 0)
+                        )
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .font(.title)
                         .padding(.horizontal)
                         .onTapGesture {
                             showFilterScreen = true
                         }
+                    
                     
                     Spacer(minLength: 8)
                     ScrollView(.horizontal, showsIndicators: false) {
