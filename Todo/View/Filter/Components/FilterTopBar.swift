@@ -16,7 +16,7 @@ struct FilterTopBar: View {
                 .frame(maxWidth: .infinity, alignment: .center)
             HStack {
                 Text(LocalizedStrings.cancel)
-                    .font(.custom(Typeface.medium, size: 16))
+                    .font(.custom(Typeface.medium, size: 15))
                     .foregroundColor(.text)
                     .onTapGesture {
                         dismiss()

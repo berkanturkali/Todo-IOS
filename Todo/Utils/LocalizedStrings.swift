@@ -33,6 +33,9 @@ struct LocalizedStrings {
     static var shopping: String { localizedString(for: "shopping") }
     static var cancel: String { localizedString(for: "cancel") }
     static var filters: String { localizedString(for: "filters") }
+    static var active: String { localizedString(for: "active") }
+    static var completed: String { localizedString(for: "completed") }
+    static var important: String { localizedString(for: "important") }
     
     static func localizedString(for key: String) -> String {
         return NSLocalizedString(key, comment: "")

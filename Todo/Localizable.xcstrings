@@ -1,6 +1,23 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "active" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Active"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktif"
+          }
+        }
+      }
+    },
     "all" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -52,8 +69,22 @@
         }
       }
     },
-    "Cancel" : {
-
+    "completed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completed"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tamamlandı"
+          }
+        }
+      }
     },
     "decoding_error" : {
       "extractionState" : "manual",
@@ -204,6 +235,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bir şeyler ters gitti. Hata kodu: %d, hata mesajı: %@"
+          }
+        }
+      }
+    },
+    "important" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Important"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Önemli"
           }
         }
       }
