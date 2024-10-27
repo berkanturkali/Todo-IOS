@@ -15,25 +15,29 @@ struct TodoSection<Content: View>: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(spacing: 16) {
             HStack {
                 Image(systemName: icon)
-                    .font(.title2)
+                    .font(.title3)
                     .bold()
                 
                 Text(title)
                     .font(
                         .custom(
                             Typeface.semibold,
-                            size: 20
+                            size: 18
                         )
                     )
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal)
             .foregroundColor(.text)
             
             content
-            
         }
+  
+     
+        
     }
 }
 

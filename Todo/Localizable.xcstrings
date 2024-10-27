@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@" : {
+
+    },
     "active" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -14,6 +17,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aktif"
+          }
+        }
+      }
+    },
+    "add_new_todo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add New Todo"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeni Todo"
           }
         }
       }
@@ -375,6 +395,23 @@
         }
       }
     },
+    "normal" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Normal"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Normal"
+          }
+        }
+      }
+    },
     "not_connected_to_internet" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -616,6 +653,9 @@
         }
       }
     },
+    "Value" : {
+
+    },
     "work" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -633,18 +673,35 @@
         }
       }
     },
+    "x_characters_remaining" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d characters remaining."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d karakter kaldı."
+          }
+        }
+      }
+    },
     "your_task" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "What is your task?"
+            "value" : "What’s your task?"
           }
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Ne yapcan?"
           }
         }

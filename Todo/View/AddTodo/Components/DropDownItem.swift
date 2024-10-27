@@ -18,8 +18,6 @@ struct DropDownItem: View {
             Image(systemName: "chevron.down.circle")
                 .font(.title3)
                 .fontWeight(.medium)
-            
-            
         }
         .padding(.horizontal, 24)
         .padding(.vertical)

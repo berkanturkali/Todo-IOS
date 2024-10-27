@@ -42,6 +42,9 @@ struct LocalizedStrings {
     static var time: String { localizedString(for: "time") }
     static var notifyMe: String { localizedString(for: "notify_me") }
     static var yourTask: String { localizedString(for: "your_task") }
+    static var addNewTodo: String { localizedString(for: "add_new_todo") }
+    static var xCharactersRemaining: String { localizedString(for: "x_characters_remaining") }
+    static var normal: String { localizedString(for: "normal") }
     
     
     static func localizedString(for key: String) -> String {
