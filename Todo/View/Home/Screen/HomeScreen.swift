@@ -16,20 +16,30 @@ struct HomeScreen: View {
             Color.background.ignoresSafeArea(.all)
             ScrollView() {
                 LazyVStack {
-                    Image(systemName: "line.3.horizontal.decrease.circle")
-                        .overlay(
-                            Circle()
-                                .fill(Color.buttonSecondary)
-                                .frame(width: 10, height: 10)
-                                .offset(x: 10, y: -10)
-                                .opacity(viewModel.showBadgeOnTheFilterButton ? 1 : 0)
-                        )
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                        .font(.title)
-                        .padding(.horizontal)
-                        .onTapGesture {
-                            showFilterScreen = true
-                        }
+                    HStack(spacing: 12) {
+                        
+                        Image(systemName: "plus.app")
+                            .onTapGesture {
+                                // navigate to add todo screen
+                            }
+                        
+                        Image(systemName: "line.3.horizontal.decrease.circle")
+                            .overlay(
+                                Circle()
+                                    .fill(Color.buttonSecondary)
+                                    .frame(width: 10, height: 10)
+                                    .offset(x: 10, y: -10)
+                                    .opacity(viewModel.showBadgeOnTheFilterButton ? 1 : 0)
+                            )
+          
+                            .onTapGesture {
+                                showFilterScreen = true
+                            }
+                    }
+                    .foregroundColor(.text)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .font(.title)
+                    .padding(.horizontal)
                     
                     
                     Spacer(minLength: 8)

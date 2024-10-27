@@ -36,6 +36,13 @@ struct LocalizedStrings {
     static var active: String { localizedString(for: "active") }
     static var completed: String { localizedString(for: "completed") }
     static var important: String { localizedString(for: "important") }
+    static var category: String { localizedString(for: "category") }
+    static var importance: String { localizedString(for: "importance") }
+    static var date: String { localizedString(for: "date") }
+    static var time: String { localizedString(for: "time") }
+    static var notifyMe: String { localizedString(for: "notify_me") }
+    static var yourTask: String { localizedString(for: "your_task") }
+    
     
     static func localizedString(for key: String) -> String {
         return NSLocalizedString(key, comment: "")
