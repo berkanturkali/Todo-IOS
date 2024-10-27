@@ -52,6 +52,9 @@ struct TodoPickerView: View {
                 .offset(y: pickerOffset)
                 
             }
+            .onAppear {
+                selectedValue = ""
+            }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             .edgesIgnoringSafeArea(.bottom)
             .background(Color.background.opacity(0.2))
