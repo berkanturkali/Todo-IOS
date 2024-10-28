@@ -10,6 +10,8 @@ struct TodoPickerView: View {
     
     @Binding var isVisible: Bool
     
+    let title: String
+    
     let options: [String]
     
     let onDoneButtonPressed: (String) -> Void
@@ -27,21 +29,33 @@ struct TodoPickerView: View {
                 .pickerStyle(.wheel)
                 .labelsHidden()
                 .overlay {
-                    Image(systemName: "checkmark")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                        .padding()
-                        .font(.title3)
-                        .foregroundColor(.text)
-                        .fontWeight(.medium)
-                        .onTapGesture {
-                            withAnimation {
-                                pickerOffset = UIScreen.main.bounds.height
+                    ZStack {
+                        
+                        Text(title)
+                            .padding(.horizontal)
+                            .background(Color.background)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                            .padding(.vertical)
+                            .font(.custom(Typeface.semibold, size: 18))
+                        
+                        
+                        
+                        Image(systemName: "checkmark")
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                            .padding()
+                            .font(.title3)
+                            .foregroundColor(.text)
+                            .fontWeight(.medium)
+                            .onTapGesture {
+                                withAnimation {
+                                    pickerOffset = UIScreen.main.bounds.height
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                    isVisible.toggle()
+                                    onDoneButtonPressed(selectedValue)
+                                }
                             }
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                isVisible.toggle()
-                                onDoneButtonPressed(selectedValue)
-                            }
-                        }
+                    }
                 }
                 .modifier(BackgroundModifier(radius: 18, shadowX: 8, shadowY: -12))
                 .onAppear {
@@ -76,6 +90,7 @@ struct TodoPickerView: View {
 #Preview {
     TodoPickerView(
         isVisible: .constant(true),
+        title: AddNewTodoClickedItem.categories.title,
         options: Category.allCases.map { category in
             category.title
         }) { _ in

@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-struct DropDownItem: View {
+struct AddNewTodoListItem: View {
     
     let selectedValue: String
     
@@ -12,12 +12,13 @@ struct DropDownItem: View {
         HStack {
             Text(selectedValue)
                 .font(.custom(Typeface.medium, size: 18))
-            
+
             Spacer()
             
             Image(systemName: "chevron.down.circle")
                 .font(.title3)
                 .fontWeight(.medium)
+            
         }
         .padding(.horizontal, 24)
         .padding(.vertical)
@@ -30,8 +31,8 @@ struct DropDownItem: View {
 }
 
 #Preview {
-    DropDownItem(
+    AddNewTodoListItem(
         selectedValue: Category.all.title,
-        onItemClicked: {
-        })
+        onItemClicked: {}
+    )
 }

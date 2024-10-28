@@ -13,10 +13,13 @@ struct SwitchSectionItem: View {
             Text(label)
                 .font(.custom(Typeface.medium, size: 18))
         }
-        .toggleStyle(SwitchToggleStyle())
+        .toggleStyle(
+            .switch
+        )
         .padding(.horizontal, 24)
         .padding(.vertical)
         .modifier(BackgroundModifier(radius: 12, shadowX: 4, shadowY: 4))
+        .tint(.buttonSecondary)
         .padding(.horizontal, 6)
     }
 }

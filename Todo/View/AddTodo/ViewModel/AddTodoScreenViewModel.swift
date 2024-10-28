@@ -17,6 +17,8 @@ class AddTodoScreenViewModel: ObservableObject {
     
     @Published var clickedItem: AddNewTodoClickedItem? = nil
     
+    @Published var isCheckmarkActive: Bool = false
+    
     private var cancellables = Set<AnyCancellable>()
     
     
@@ -25,22 +27,27 @@ class AddTodoScreenViewModel: ObservableObject {
     }
     
     private func setupBindings() {
-        $clickedItem.compactMap {
-            $0
-        }
-        .map { clickedItem -> [String] in
-            switch clickedItem {
-            case .categories:
-                return Category.allCases.map(\.title)
-            case .importance:
-                return Importance.allCases.map(\.value)
+        $clickedItem
+            .compactMap {
+                $0
             }
-        }
-        .sink { [weak self] list in
-            self?.pickerList = list
-            self?.showPicker.toggle()
-        }
-        .store(in: &cancellables)
+            .map { clickedItem -> [String] in
+                switch clickedItem {
+                case .categories:
+                    return Category.allCases.map(\.title)
+                case .importance:
+                    return Importance.allCases.map(\.value)
+                }
+            }
+            .sink { [weak self] list in
+                self?.pickerList = list
+                self?.showPicker.toggle()
+            }
+            .store(in: &cancellables)
+    }
+    
+    func onCheckmarkClicked() {
+        
     }
     
 }
