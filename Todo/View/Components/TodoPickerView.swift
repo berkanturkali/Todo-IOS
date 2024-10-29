@@ -4,7 +4,7 @@ import SwiftUI
 
 struct TodoPickerView: View {
     
-    @State private var selectedValue = ""
+    @State var selectedValue: String
     
     @State private var pickerOffset: CGFloat = UIScreen.main.bounds.height
     
@@ -19,6 +19,7 @@ struct TodoPickerView: View {
     var body: some View {
         if isVisible {
             ZStack {
+                
                 Picker("Value", selection: $selectedValue) {
                     ForEach(options, id: \.self) { option in
                         Text("\(option)").tag(option)
@@ -34,18 +35,12 @@ struct TodoPickerView: View {
                         Text(title)
                             .padding(.horizontal)
                             .background(Color.background)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                             .padding(.vertical)
                             .font(.custom(Typeface.semibold, size: 18))
-                        
-                        
-                        
+
                         Image(systemName: "checkmark")
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                            .padding()
-                            .font(.title3)
-                            .foregroundColor(.text)
-                            .fontWeight(.medium)
+                            .padding(.horizontal)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
                             .onTapGesture {
                                 withAnimation {
                                     pickerOffset = UIScreen.main.bounds.height
@@ -55,7 +50,13 @@ struct TodoPickerView: View {
                                     onDoneButtonPressed(selectedValue)
                                 }
                             }
+                            .padding()
+                            .font(.title3)
+                            .foregroundColor(.text)
+                            .fontWeight(.medium)
+                    
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 }
                 .modifier(BackgroundModifier(radius: 18, shadowX: 8, shadowY: -12))
                 .onAppear {
@@ -65,9 +66,6 @@ struct TodoPickerView: View {
                 }
                 .offset(y: pickerOffset)
                 
-            }
-            .onAppear {
-                selectedValue = ""
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             .edgesIgnoringSafeArea(.bottom)
@@ -89,6 +87,7 @@ struct TodoPickerView: View {
 
 #Preview {
     TodoPickerView(
+        selectedValue: "",
         isVisible: .constant(true),
         title: AddNewTodoClickedItem.categories.title,
         options: Category.allCases.map { category in

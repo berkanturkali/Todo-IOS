@@ -6,11 +6,10 @@ struct AddTodoScreen: View {
     
     @StateObject private var viewModel = AddTodoScreenViewModel()
     
-    private let characterLimit = 100
-    
     @State var showDatePicker = false
     
-    @State private var selectedDate = Date()
+    
+    private let characterLimit = 100
     
     var body: some View {
         ZStack {
@@ -19,7 +18,10 @@ struct AddTodoScreen: View {
                 VStack {
                     ZStack {
                         BackButton()
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .frame(
+                                maxWidth: .infinity,
+                                alignment: .leading
+                            )
                             .padding(.horizontal)
                         
                         Text(LocalizedStrings.addNewTodo)
@@ -31,10 +33,10 @@ struct AddTodoScreen: View {
                             .fontWeight(.medium)
                             .frame(maxWidth: .infinity, alignment: .trailing)
                             .padding(.horizontal)
-                            .foregroundColor(viewModel.isCheckmarkActive ? .text : .text.opacity(0.5))
+                            .foregroundColor(.text)
                             .onTapGesture {
-                                if(viewModel.isCheckmarkActive) {
-                                    viewModel.onCheckmarkClicked()
+                                Task {
+                                    await viewModel.onCheckmarkClicked()
                                 }
                             }
                         
@@ -47,21 +49,19 @@ struct AddTodoScreen: View {
                     VStack(spacing: 32) {
                         TodoSection(title: LocalizedStrings.category, icon: "square.grid.2x2") {
                             AddNewTodoListItem(selectedValue: viewModel.selectedCategory.title) {
-                                withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
-                                    viewModel.clickedItem = .categories
-                                }
+                                viewModel.clickedItem = .categories
                             }
                         }
                         
                         TodoSection(title: LocalizedStrings.importance, icon: "exclamationmark") {
-                            AddNewTodoListItem(selectedValue: viewModel.selectedCategory.title) {
+                            AddNewTodoListItem(selectedValue: viewModel.selectedImportance.value) {
                                 viewModel.clickedItem = .importance
                             }
                         }
                         
-                        TodoDatePicker()
+                        TodoDatePicker(selectedDate: $viewModel.selectedDate)
                         
-                        TodoTimePicker()
+                        TodoTimePicker(selectedTime: $viewModel.selectedTime)
                         
                         SwitchSectionItem(label: LocalizedStrings.notifyMe, isOn: $viewModel.notifyMe)
                         
@@ -94,14 +94,32 @@ struct AddTodoScreen: View {
                 }
                 .scrollIndicators(.hidden)
             }
-            .blurOnAlert(isAlertVisible: viewModel.showPicker)
+            .blurOnAlert(isAlertVisible: viewModel.showPicker || viewModel.showAlert)
+            .overlay {
+                TodoDialog(message: viewModel.messageWithCallback?.message ?? "", isVisible: $viewModel.showAlert) {
+                    if let callback = viewModel.messageWithCallback?.callback {
+                        callback()
+                    }
+                }
+            }
             
             TodoPickerView(
+                selectedValue: viewModel.selectedValueOfPicker,
                 isVisible: $viewModel.showPicker,
                 title: viewModel.clickedItem?.title ?? "",
                 options: viewModel.pickerList
-            ) { _ in
-                
+            ) { value in
+                switch viewModel.clickedItem {
+                case .categories:
+                    print("selected category  \(value)")
+                    viewModel.selectedCategory = Category.allCases.first(where: { $0.title == value })!
+                case .importance:
+                    print("selected importance  \(value)")
+                    viewModel.selectedImportance = Importance.allCases.first(where: { $0.value == value })!
+                case .none:
+                    viewModel.selectedCategory = .all
+                    viewModel.selectedImportance = .normal
+                }
             }
             
         }

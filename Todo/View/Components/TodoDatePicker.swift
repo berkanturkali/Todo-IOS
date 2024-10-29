@@ -4,7 +4,7 @@ import SwiftUI
 
 struct TodoDatePicker: View {
     
-    @State private var selectedDate = Date()
+    @Binding var selectedDate: Date
     
     let calendar = Calendar.current
     
@@ -75,5 +75,5 @@ struct TodoDatePicker: View {
 
 
 #Preview {
-    TodoDatePicker()
+    TodoDatePicker(selectedDate: .constant(Date()))
 }

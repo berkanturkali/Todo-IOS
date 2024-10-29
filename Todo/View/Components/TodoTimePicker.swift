@@ -4,7 +4,7 @@ import SwiftUI
 
 struct TodoTimePicker: View {
     
-    @State private var selectedTime = Date()
+    @Binding var selectedTime: Date
     
     private var timeRange: ClosedRange<Date> {
         let calendar = Calendar.current
@@ -49,5 +49,5 @@ struct TodoTimePicker: View {
 }
 
 #Preview {
-    TodoTimePicker()
+    TodoTimePicker(selectedTime: .constant(Date()))
 }

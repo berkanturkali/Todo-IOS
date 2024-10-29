@@ -605,6 +605,23 @@
         }
       }
     },
+    "task_can_not_be_empty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Task can not be empty!"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boş task oluşturamazsın!"
+          }
+        }
+      }
+    },
     "time" : {
       "extractionState" : "manual",
       "localizations" : {
