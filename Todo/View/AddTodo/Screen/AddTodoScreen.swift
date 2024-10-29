@@ -123,6 +123,7 @@ struct AddTodoScreen: View {
             }
             
         }
+        .navigationBarBackButtonHidden()
         
     }
 }
