@@ -39,12 +39,7 @@ struct MainScreen: View {
         }))
             
         case .profile:
-            Text(
-                "Profile"
-            )
-            .font(
-                .body
-            )
+            ProfileScreen()
         }
     }
 }
