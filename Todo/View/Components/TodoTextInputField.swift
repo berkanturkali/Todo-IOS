@@ -20,21 +20,33 @@ struct TodoTextInputField: View {
         HStack {
             if let image {
                 Image(systemName: image)
-                    .foregroundColor(.text)
+                    .foregroundColor(.text.opacity(0.5))
             }
             
-            TextField(hint, text: $text)
-                .font(.custom(Typeface.light, size: textSize))
-                .autocapitalization(autoCapitalization)
-                .keyboardType(keyboardType)
-                .accentColor(.text)
+            TextField(
+                hint,
+                text: $text,
+                prompt: Text(
+                    hint
+                ).foregroundColor(
+                    .text.opacity(
+                        0.5
+                    )
+                )
+            )
+            .font(.custom(Typeface.light, size: textSize))
+            .autocapitalization(autoCapitalization)
+            .keyboardType(keyboardType)
+            
+            .accentColor(.text)
             
             if(!text.isEmpty) {
                 Button {
                     text = ""
                 } label: {
                     Image(systemName: "multiply.circle")
-                        .foregroundColor(.text)
+                        .foregroundColor(.text.opacity(0.5))
+                    
                     
                 }
                 .padding(.trailing, 4)

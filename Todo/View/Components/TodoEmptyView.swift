@@ -48,12 +48,11 @@ struct TodoEmptyView<Destination: View>: View {
                             }
                         
                     } else {
-                        NavigationStack {
-                            TodoNavigationButton<Destination>(
-                                destination: destination!,
-                                labelText: text
-                            )
-                        }
+                        TodoNavigationButton<Destination>(
+                            destination: destination!,
+                            labelText: text
+                        )
+                        
                     }
                 }
             }
@@ -67,7 +66,9 @@ struct TodoNavigationButton<Destination: View>: View {
     let labelText: String
     
     var body: some View {
-        NavigationLink(destination: destination) {
+        NavigationLink {
+            destination
+        } label: {
             Text(labelText)
                 .font(.custom(Typeface.semibold, size: 16))
                 .padding(.horizontal, 32)

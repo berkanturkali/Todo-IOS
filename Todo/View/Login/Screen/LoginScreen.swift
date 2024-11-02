@@ -6,10 +6,8 @@ struct LoginScreen: View {
     
     @StateObject var viewModel = LoginScreenViewModel()
     
-    @State var navigationPath = NavigationPath()
-    
     var body: some View {
-        NavigationStack(path: $navigationPath) {
+        NavigationStack {
             LoginScreenContent(
                 email: $viewModel.email,
                 password: $viewModel.password,
@@ -20,21 +18,17 @@ struct LoginScreen: View {
                     }
                 }
             )
-            .blurOnAlert(isAlertVisible: viewModel.showAlert)
+            .blurOnAlert(isAlertVisible: viewModel.showAlert || viewModel.isLoading)
             .overlay {
                 TodoDialog(message: viewModel.errorMessage ?? "", isVisible: $viewModel.showAlert) {
                     viewModel.errorMessage = nil
                 }
-            }
-            .onChange(of: viewModel.navigateToMainScreen) {
-                if(viewModel.navigateToMainScreen) {
-                    navigationPath.append("Main")
+                if(viewModel.isLoading) {
+                    TodoLoadingIndicator()
                 }
             }
-            .navigationDestination(for: String.self) { destination in
-                if(destination == "Main") {
-                    MainScreen()
-                }
+            .navigationDestination(isPresented: $viewModel.navigateToMainScreen) {
+                MainScreen()
             }
         }
     }
