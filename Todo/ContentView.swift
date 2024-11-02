@@ -4,9 +4,12 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    
     var body: some View {
-        MainScreen()
+        if let _ = UserDefaults.standard.string(forKey: Constants.tokenKey) {
+            MainScreen()
+        } else {
+            LoginScreen()
+        }
     }
 }
 

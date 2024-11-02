@@ -6,15 +6,15 @@ struct LoginScreen: View {
     
     @StateObject var viewModel = LoginScreenViewModel()
     
+    @State var navigationPath = NavigationPath()
+    
     var body: some View {
-        
-        @State var showSuccessAlert = viewModel.loginResponse != nil
-        
-        NavigationStack {
+        NavigationStack(path: $navigationPath) {
             LoginScreenContent(
                 email: $viewModel.email,
                 password: $viewModel.password,
                 onLoginButtonClick: {
+                    viewModel.navigateToMainScreen = false
                     Task {
                         await viewModel.onLoginButtonClick()
                     }
@@ -26,9 +26,19 @@ struct LoginScreen: View {
                     viewModel.errorMessage = nil
                 }
             }
-            
+            .onChange(of: viewModel.navigateToMainScreen) {
+                if(viewModel.navigateToMainScreen) {
+                    navigationPath.append("Main")
+                }
+            }
+            .navigationDestination(for: String.self) { destination in
+                if(destination == "Main") {
+                    MainScreen()
+                }
+            }
         }
     }
+    
 }
 
 #Preview {

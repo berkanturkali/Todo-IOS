@@ -4,17 +4,14 @@ import SwiftUI
 
 struct HomeScreen: View {
     
-    let todos: [Todo]
-    
     @StateObject var viewModel = HomeScreenViewModel()
     
     @State private var showFilterScreen = false
     
-    
     var body: some View {
-        return NavigationStack {
-            ZStack {
-                Color.background.ignoresSafeArea(.all)
+        ZStack {
+            Color.background.ignoresSafeArea(.all)
+            if(!viewModel.showEmptyView) {
                 VStack {
                     HStack(spacing: 12) {
                         NavigationLink {
@@ -59,7 +56,7 @@ struct HomeScreen: View {
                             }
                             .frame(height: 50)
                             
-                            ForEach(todos, id: \.self) { todo in
+                            ForEach(viewModel.todos, id: \.self) { todo in
                                 TodoItem(todo: todo)
                                     .padding(.vertical, 10)
                                     .padding(.horizontal, 2)
@@ -67,22 +64,30 @@ struct HomeScreen: View {
                         }
                     }
                 }
-            }
-            .fullScreenCover(isPresented: $showFilterScreen) {
-                FiltersScreen(
-                    appliedFilter: viewModel.selectedFilter,
-                    onCheckMarkTapped: viewModel.onCheckMarkTapped
+                .fullScreenCover(isPresented: $showFilterScreen) {
+                    FiltersScreen(
+                        appliedFilter: viewModel.selectedFilter,
+                        onCheckMarkTapped: viewModel.onCheckMarkTapped
+                    )
+                }
+                
+            } else {
+                TodoEmptyView<AddTodoScreen>(
+                    destination: AddTodoScreen(),
+                    description: LocalizedStrings.youCanStartByAddingNewTodo,
+                    buttonText: LocalizedStrings.addTodo
                 )
             }
             
         }
+        
+        
     }
+    
 }
 
 #Preview {
-    HomeScreen(
-        todos: (1...100).map({ i in
-            Todo.mockTodo
-        })
-    )
+    NavigationStack {
+        HomeScreen()
+    }
 }

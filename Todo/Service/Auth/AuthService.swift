@@ -44,7 +44,7 @@ struct AuthService {
                 body: body,
                 responseType: BaseResponse<NoData>.self
             )
-            return response.message
+            return response.message ?? ""
             
         } catch  {
             

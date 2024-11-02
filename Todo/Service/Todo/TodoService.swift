@@ -21,7 +21,7 @@ struct TodoService {
                 responseType: BaseResponse<NoData>.self
             )
             
-            return response.message
+            return response.message ?? ""
         } catch {
             throw error
         }

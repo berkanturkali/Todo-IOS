@@ -10,6 +10,9 @@
     "%@" : {
 
     },
+    "😕" : {
+
+    },
     "0" : {
 
     },
@@ -43,6 +46,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Yeni Todo"
+          }
+        }
+      }
+    },
+    "add_todo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Todo"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todo Ekle"
           }
         }
       }
@@ -444,6 +464,23 @@
         }
       }
     },
+    "nothing_to_see_here" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oops, Nothing to see here."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Burada bir şey yok."
+          }
+        }
+      }
+    },
     "notify_me" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -528,9 +565,6 @@
           }
         }
       }
-    },
-    "Profile" : {
-
     },
     "profile_tab_label" : {
       "extractionState" : "manual",
@@ -727,6 +761,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%d karakter kaldı."
+          }
+        }
+      }
+    },
+    "you_can_start_by_adding_new_todo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can start by adding new todo!"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeni bir todo ekleyerek başlayabilirsin!"
           }
         }
       }

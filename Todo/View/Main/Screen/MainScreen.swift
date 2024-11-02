@@ -11,7 +11,6 @@ struct MainScreen: View {
         ZStack {
             Color.background.ignoresSafeArea()
             VStack {
-                
                 contentView(
                     for: selectedTab
                 )
@@ -27,16 +26,16 @@ struct MainScreen: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .navigationBarBackButtonHidden(true)
     }
+    
     
     @ViewBuilder
     private func contentView(
         for tab: TodoTab
     ) -> some View {
         switch tab {
-        case .home: HomeScreen(todos: (1...100).map({ i in
-            Todo.mockTodo
-        }))
+        case .home: HomeScreen()
             
         case .profile:
             ProfileScreen()

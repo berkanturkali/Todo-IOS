@@ -2,6 +2,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 @MainActor
 class LoginScreenViewModel: ObservableObject {
@@ -15,7 +16,7 @@ class LoginScreenViewModel: ObservableObject {
     
     @Published var errorMessage: String? = nil
     
-    @Published var loginResponse: LoginResponseModel? = nil
+    @Published var navigateToMainScreen: Bool = false
     
     private let authService = AuthService.shared
     
@@ -55,7 +56,11 @@ class LoginScreenViewModel: ObservableObject {
             
             let response = try await authService.login(body: body)
             
-            loginResponse = response
+            UserDefaults.standard.set(response.token, forKey: Constants.tokenKey)
+            UserDefaults.standard.set(response.id, forKey: Constants.userIdKey)
+            
+            navigateToMainScreen = true
+      
         } catch {
             print("error: \(error)")
             errorMessage = NetworkManager.shared.handleNetworkError(error as! NetworkError)

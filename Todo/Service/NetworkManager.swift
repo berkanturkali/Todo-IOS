@@ -67,6 +67,8 @@ struct NetworkManager {
                 
             }
             
+            print(data)
+            
             let decodedResponse = try JSONDecoder().decode(responseType, from: data)
             return decodedResponse
             
