@@ -4,118 +4,67 @@ import SwiftUI
 
 struct MainScreen: View {
     
-    @State private var selectedTab: TodoTab = .home
-    
     var body: some View {
-        
-        ZStack {
-            Color.background.ignoresSafeArea()
-            VStack {
-                contentView(
-                    for: selectedTab
-                )
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .layoutPriority(1)
+        NavigationStack {
+            ZStack(alignment: .bottom) {
+                Color.background.ignoresSafeArea(.all)
+                TabView {
+                    NavigationView {
+                        HomeScreen()
+                    }.tabItem {
+                        Image(
+                            systemName: "house.fill"
+                        )
+                        .accentColor(.text)
+                        .font(
+                            .system(
+                                size: 24
+                            )
+                        )
+                        
+                    }
+                    
+                    NavigationView {
+                        ProfileScreen()
+                    }.tabItem {
+                        Image(
+                            systemName: "person.fill"
+                        )
+                        .font(
+                            .system(
+                                size: 24
+                            )
+                        )
+                        
+                    }
+                    
+                }
+                .accentColor(.text)
                 
-                Spacer(minLength: 0)
-                
-                TodoTabBar(
-                    selectedTab: $selectedTab
-                )
-                
+                Divider()
+                    .padding(.bottom, 50)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
         }
         .navigationBarBackButtonHidden(true)
     }
-    
-    
-    @ViewBuilder
-    private func contentView(
-        for tab: TodoTab
-    ) -> some View {
-        switch tab {
-        case .home: HomeScreen()
-            
-        case .profile:
-            ProfileScreen()
-        }
+}
+
+extension UITabBarController {
+    open override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let appearance = UITabBarAppearance()
+        
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(Color.background)
+        
+        appearance.stackedLayoutAppearance.normal.iconColor = UIColor(Color.text.opacity(0.5))
+        
+        self.tabBar.standardAppearance = appearance
     }
 }
 
-struct TodoTabBar : View {
-    @Binding var selectedTab: TodoTab
-    
-    var body: some View {
-        HStack {
-            
-            TodoTabItem(
-                icon: "house.fill",
-                selected: selectedTab == .home
-            ) {
-                selectedTab = .home
-            }
-            
-            TodoTabItem(icon: "person.fill", selected: selectedTab == .profile) {
-                selectedTab = .profile
-            }
-        }
-        .padding(
-            .vertical,
-            8
-        )
-        .modifier(
-            BackgroundModifier(
-                radius: 20,
-                shadowX: 8,
-                shadowY: 8
-            )
-        )
-        .padding()
-        
-    }
-}
-
-struct TodoTabItem: View {
-    
-    let icon: String
-    
-    let selected: Bool
-    
-    let onButtonClick: () -> Void
-    
-    var body : some View {
-        Button(
-            action: {
-                onButtonClick()
-            }) {
-                
-                Image(
-                    systemName: icon
-                )
-                .font(
-                    .system(
-                        size: 24
-                    )
-                )
-                .foregroundColor(
-                    selected ? .text : .text.opacity(0.5)
-                )
-                .modifier(
-                    ShadowModifier(
-                        x: selected ? 0 : 2,
-                        y: selected ? 0 : 2,
-                        color: .darkShadow.opacity(0.5)
-                    )
-                )
-                
-            }
-            .frame(
-                maxWidth: .infinity
-            )
-        
-    }
-}
 
 #Preview {
     MainScreen()
