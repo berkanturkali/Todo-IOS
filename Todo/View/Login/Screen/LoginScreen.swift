@@ -4,7 +4,13 @@ import SwiftUI
 
 struct LoginScreen: View {
     
-    @StateObject var viewModel = LoginScreenViewModel()
+    @EnvironmentObject var appState: AppState
+    
+    @StateObject var viewModel : LoginScreenViewModel
+    
+    init(appState: AppState) {
+        _viewModel = StateObject(wrappedValue: LoginScreenViewModel(appState: appState))
+    }
     
     var body: some View {
         NavigationStack {
@@ -27,14 +33,11 @@ struct LoginScreen: View {
                     TodoLoadingIndicator()
                 }
             }
-            .navigationDestination(isPresented: $viewModel.navigateToMainScreen) {
-                MainScreen()
-            }
         }
     }
     
 }
 
 #Preview {
-    LoginScreen()
+    LoginScreen(appState: AppState())
 }

@@ -46,8 +46,6 @@ struct TodoTextInputField: View {
                 } label: {
                     Image(systemName: "multiply.circle")
                         .foregroundColor(.text.opacity(0.5))
-                    
-                    
                 }
                 .padding(.trailing, 4)
             }

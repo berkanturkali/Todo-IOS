@@ -22,7 +22,10 @@ class LoginScreenViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     
-    init() {
+    private var appState: AppState
+    
+    init (appState: AppState) {
+        self.appState = appState
         $errorMessage.map { $0 != nil }
             .assign(to: \.showAlert, on: self)
             .store(in: &cancellables)
@@ -59,8 +62,8 @@ class LoginScreenViewModel: ObservableObject {
             UserDefaults.standard.set(response.token, forKey: Constants.tokenKey)
             UserDefaults.standard.set(response.id, forKey: Constants.userIdKey)
             
-            navigateToMainScreen = true
-      
+            appState.isLoggedIn = true
+            
         } catch {
             print("error: \(error)")
             errorMessage = NetworkManager.shared.handleNetworkError(error as! NetworkError)

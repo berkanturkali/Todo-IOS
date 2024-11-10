@@ -56,6 +56,7 @@ struct SignupScreenContent: View {
                 .padding()
         }
         .frame(maxHeight: .infinity, alignment: .top)
+ 
     }
 }
 

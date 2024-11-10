@@ -8,11 +8,7 @@ struct PasswordInputField: View {
     
     var body: some View {
         HStack {
-            TodoTextInputField(
-                hint: LocalizedStrings.password,
-                text: $password,
-                image: "key"
-            )
+            TodoPasswordInputField(password: $password)
         }
     }
 }
