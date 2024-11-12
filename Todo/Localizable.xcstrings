@@ -583,6 +583,23 @@
         }
       }
     },
+    "retry" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retry"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tekrar dene"
+          }
+        }
+      }
+    },
     "shopping" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -673,6 +690,23 @@
     },
     "test@test.com" : {
 
+    },
+    "there_is_no_todo_found_for" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There is no todo found for ”%@”"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "“%@” için bir sonuç bulunamadı."
+          }
+        }
+      }
     },
     "time" : {
       "extractionState" : "manual",

@@ -6,6 +6,8 @@ struct BackButton: View {
     
     @Environment(\.dismiss) private var dismiss
     
+    var alternaviteAction: (() -> Void)? = nil
+    
     var body: some View {
         Circle()
             .stroke(Color.gray)
@@ -14,6 +16,7 @@ struct BackButton: View {
             .modifier(ShadowModifier(x: 1.5, y: 1.5))
             .onTapGesture {
                 dismiss()
+                alternaviteAction?()
             }
             .overlay {
                 Image(systemName: "chevron.backward")

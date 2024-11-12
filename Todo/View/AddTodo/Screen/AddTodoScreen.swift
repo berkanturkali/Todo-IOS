@@ -8,8 +8,9 @@ struct AddTodoScreen: View {
     
     @State var showDatePicker = false
     
-    
     private let characterLimit = 100
+    
+    let onBackButtonPressed: (Bool) -> Void
     
     var body: some View {
         ZStack {
@@ -17,12 +18,14 @@ struct AddTodoScreen: View {
             VStack(spacing: 16) {
                 VStack {
                     ZStack {
-                        BackButton()
-                            .frame(
-                                maxWidth: .infinity,
-                                alignment: .leading
-                            )
-                            .padding(.horizontal)
+                        BackButton() {
+                            onBackButtonPressed(viewModel.refreshHomeScreen)
+                        }
+                        .frame(
+                            maxWidth: .infinity,
+                            alignment: .leading
+                        )
+                        .padding(.horizontal)
                         
                         Text(LocalizedStrings.addNewTodo)
                             .font(.custom(Typeface.semibold, size: 20))
@@ -129,5 +132,5 @@ struct AddTodoScreen: View {
 }
 
 #Preview {
-    AddTodoScreen()
+    AddTodoScreen(onBackButtonPressed: {_ in})
 }

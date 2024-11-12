@@ -12,58 +12,52 @@ struct HomeScreen: View {
         NavigationStack {
             ZStack {
                 Color.background.ignoresSafeArea(.all)
-                if(!viewModel.showEmptyView) {
-                    VStack {
-                        HStack(spacing: 12) {
-                            NavigationLink {
-                                AddTodoScreen()
-                            } label: {
-                                Image(systemName: "plus.app")
-                            }
-                            
-                            Image(systemName: "line.3.horizontal.decrease.circle")
-                                .overlay(
-                                    Circle()
-                                        .fill(Color.buttonSecondary)
-                                        .frame(width: 10, height: 10)
-                                        .offset(x: 10, y: -10)
-                                        .opacity(viewModel.showBadgeOnTheFilterButton ? 1 : 0)
-                                )
-                            
-                                .onTapGesture {
-                                    showFilterScreen = true
-                                }
+                if(viewModel.errorMessage != nil) {
+                    ErrorView(message: viewModel.errorMessage!) {
+                        Task {
+                            viewModel.resetQueryParams()
                         }
-                        .foregroundColor(.text)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                        .font(.title)
-                        .padding(.horizontal)
+                    }
+                } else if(viewModel.showEmptyView) {
+                    TodoEmptyView<AddTodoScreen>(
+                        destination: AddTodoScreen(onBackButtonPressed: { refresh in
+                            if(refresh) {
+                                Task {
+                                    viewModel.resetQueryParams()
+                                }
+                            }
+                        }),
+                        description: LocalizedStrings.youCanStartByAddingNewTodo,
+                        buttonText: LocalizedStrings.addTodo
+                    )
+                } else {
+                    VStack(spacing: 8) {
+                        HomeScreenTopBar(
+                            showFilterScreen: $showFilterScreen,
+                            showBadgeOnTheFilterButton: viewModel.showBadgeOnTheFilterButton
+                        ) {
+                            Task {
+                                await viewModel.fetchTodos()
+                            }
+                        }
                         
-                        ScrollView() {
-                            LazyVStack {
-                                Spacer(minLength: 8)
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    LazyHStack {
-                                        ForEach(Category.allCases, id: \.self) { category in
-                                            CategoryItem(
-                                                category: category,
-                                                selected: viewModel.selectedCategory == category
-                                            ) {
-                                                viewModel.selectedCategory = category
-                                            }
-                                        }
-                                    }
-                                    .padding(.horizontal)
-                                }
-                                .frame(height: 50)
-                                
-                                ForEach(viewModel.todos, id: \.self) { todo in
-                                    TodoItem(todo: todo)
-                                        .padding(.vertical, 10)
-                                        .padding(.horizontal, 2)
-                                }
-                            }
+                        CategoriesView(selectedCategory: $viewModel.selectedCategory)
+                        if (viewModel.loading) {
+                            Spacer()
+                            TodoLoadingIndicator(size: 30)
+                            Spacer()
+                        } else if(viewModel.showEmptyViewForTheCategory) {
+                            Spacer()
+                            EmptyViewForQuery(
+                                query: viewModel.selectedCategory.title
+                            )
+                            Spacer()
+                        } else {
+                            TodoList(
+                                todos: viewModel.todos
+                            )                            
                         }
+                        
                     }
                     .fullScreenCover(isPresented: $showFilterScreen) {
                         FiltersScreen(
@@ -71,22 +65,12 @@ struct HomeScreen: View {
                             onCheckMarkTapped: viewModel.onCheckMarkTapped
                         )
                     }
-                    
-                } else {
-                    TodoEmptyView<AddTodoScreen>(
-                        destination: AddTodoScreen(),
-                        description: LocalizedStrings.youCanStartByAddingNewTodo,
-                        buttonText: LocalizedStrings.addTodo
-                    )
-                    
                 }
                 
             }
+            .blurOnAlert(isAlertVisible: viewModel.loading)
         }
-        
-        
     }
-    
 }
 
 #Preview {
@@ -94,3 +78,4 @@ struct HomeScreen: View {
         HomeScreen()
     }
 }
+

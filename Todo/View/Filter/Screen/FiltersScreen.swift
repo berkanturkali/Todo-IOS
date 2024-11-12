@@ -4,11 +4,11 @@ import SwiftUI
 
 struct FiltersScreen: View {
     
-    let appliedFilter: Filter
-    
     @State var selectedFilter: Filter = .all
     
     @State var isCheckMarkActive: Bool = false
+    
+    let appliedFilter: Filter
     
     let onCheckMarkTapped: (Filter) -> Void
     

@@ -10,6 +10,12 @@ struct NetworkManager {
     
     private init() {}
     
+    var sendToken: Bool = false
+    
+    mutating func setSendToken(send: Bool) {
+        self.sendToken = send
+    }
+    
     func handleNetworkError(_ error : NetworkError) -> String {
         switch error {
         case .badURL(let url):
@@ -19,7 +25,6 @@ struct NetworkManager {
         case .decodingError(let error):
             return String(format: LocalizedStrings.decodingError, error.localizedDescription)
         case .httpError(let code, let message):
-            print("here")
             return String(format: LocalizedStrings.somethingWentWrongWithTheCodeAndMessage, code, message)
         case .notConnectedToInternet:
             return LocalizedStrings.notConnectedToInternet
@@ -31,6 +36,15 @@ struct NetworkManager {
             return LocalizedStrings.somethingWentWrong
         }
     }
+    
+    func getRequest<U:Codable> (
+        to url: String,
+        responseType: U.Type
+    ) async throws -> U {
+        return try await request(to: url, method: HttpMethod.GET, body: nil as Never?, responseType: responseType)
+    }
+    
+    
     
     func request<T: Encodable, U: Codable> (
         to endpoint: String,
@@ -48,6 +62,10 @@ struct NetworkManager {
             
             var request = URLRequest(url: url)
             request.httpMethod = method.rawValue
+            if(sendToken) {
+                let token = UserDefaults.standard.string(forKey: Constants.tokenKey)
+                request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
+            }
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             
             if let body = body {

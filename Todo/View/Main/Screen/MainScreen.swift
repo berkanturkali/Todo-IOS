@@ -4,6 +4,11 @@ import SwiftUI
 
 struct MainScreen: View {
     
+    init () {
+        UITabBar.appearance().barTintColor = UIColor(Color.background)
+        UITabBar.appearance().backgroundColor = UIColor(Color.background)
+    }
+    
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
@@ -48,24 +53,4 @@ struct MainScreen: View {
         }
         .navigationBarBackButtonHidden(true)
     }
-}
-
-extension UITabBarController {
-    open override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        let appearance = UITabBarAppearance()
-        
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(Color.background)
-        
-        appearance.stackedLayoutAppearance.normal.iconColor = UIColor(Color.text.opacity(0.5))
-        
-        self.tabBar.standardAppearance = appearance
-    }
-}
-
-
-#Preview {
-    MainScreen()
 }

@@ -49,6 +49,8 @@ struct LocalizedStrings {
     static var nothingToSeeHere: String { localizedString(for: "nothing_to_see_here") }
     static var addTodo: String { localizedString(for: "add_todo") }
     static var youCanStartByAddingNewTodo: String { localizedString(for: "you_can_start_by_adding_new_todo")  }
+    static var retry: String { localizedString(for: "retry") }
+    static var thereIsNoTodoFoundFor: String { localizedString(for: "there_is_no_todo_found_for") }
     
     static func localizedString(for key: String) -> String {
         return NSLocalizedString(key, comment: "")

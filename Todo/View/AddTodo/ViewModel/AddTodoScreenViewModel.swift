@@ -32,6 +32,8 @@ class AddTodoScreenViewModel: ObservableObject {
     
     @Published var isLoading: Bool = false
     
+    var refreshHomeScreen: Bool = false
+    
     private var cancellables = Set<AnyCancellable>()
     
     private let todoService = TodoService.shared
@@ -99,6 +101,7 @@ class AddTodoScreenViewModel: ObservableObject {
             messageWithCallback = MessageWithCallback(message: response) {
                 self.messageWithCallback = nil
                 self.resetTheScreen()
+                self.refreshHomeScreen = true
                 
             }
             

@@ -5,11 +5,13 @@ import Foundation
 
 struct AuthService {
     
-    private let networkManager = NetworkManager.shared
+    private var networkManager = NetworkManager.shared
     
     static let shared = AuthService()
     
-    private init() {}
+    private init() {
+        networkManager.setSendToken(send: false)
+    }
     
     func login(body: LoginRequestModel) async throws -> LoginResponseModel {
         
@@ -27,8 +29,6 @@ struct AuthService {
         } catch {
             throw error
         }
-        
-        
         
     }
     

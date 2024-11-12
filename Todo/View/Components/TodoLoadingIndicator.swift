@@ -4,14 +4,16 @@ import SwiftUI
 
 struct TodoLoadingIndicator: View {
     
+    var size: CGFloat = 100
+    
     @State var isAnimating: Bool = false
     
     var body: some View {
         ZStack {
-            Color.background.ignoresSafeArea()
+            Color.background.opacity(0.3).ignoresSafeArea()
             
             RoundedRectangle(cornerRadius: 20)
-                .frame(width: 100, height: 100)
+                .frame(width: size, height: size)
                 .foregroundColor(.clear)
                 .modifier(BackgroundModifier(shadowX: 4, shadowY: 4))
                 .overlay {
@@ -20,7 +22,7 @@ struct TodoLoadingIndicator: View {
                         .stroke(
                             .text,
                             style: StrokeStyle(
-                                lineWidth: 5,
+                                lineWidth: size / 20,
                                 lineCap: .round
                             )
                         )
@@ -30,6 +32,7 @@ struct TodoLoadingIndicator: View {
                             .linear(duration: 1).repeatForever(autoreverses: false),
                             value: isAnimating
                         )
+                        .frame(width: size / 2.5, height: size / 2.5)
                         .padding(30)
                 }
             
@@ -41,5 +44,9 @@ struct TodoLoadingIndicator: View {
 }
 
 #Preview {
-    TodoLoadingIndicator()
+    VStack {
+        TodoLoadingIndicator()
+        TodoLoadingIndicator(size: 50)
+    }
+    
 }

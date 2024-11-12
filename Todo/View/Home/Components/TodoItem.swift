@@ -41,9 +41,9 @@ struct TodoItem: View {
                 
                 Image(systemName: "clock")
                     .font(.callout)
-                
-                Text(todo.date)
-                    .font(.custom(Typeface.medium, size: 14))
+//                
+//                Text(todo.date)
+//                    .font(.custom(Typeface.medium, size: 14))
             }
             .frame(maxWidth: .infinity)
         }

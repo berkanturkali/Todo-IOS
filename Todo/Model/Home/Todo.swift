@@ -3,9 +3,9 @@
 import Foundation
 
 struct Todo: Hashable, Codable {
-    let id: String
+    let _id: String
     let category: String
-    let date: String
+    let date: Int64
     let todo: String
     let completed: Bool
     let important: Bool
@@ -16,9 +16,9 @@ struct Todo: Hashable, Codable {
     
     static var mockTodo: Todo {
         return Todo(
-            id: UUID().uuidString,
+            _id: UUID().uuidString,
             category: Category.all.title,
-            date: "11:02",
+            date: 12312312,
             todo: "Get Married",
             completed: true,
             important: true
