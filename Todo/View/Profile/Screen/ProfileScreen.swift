@@ -6,6 +6,8 @@ struct ProfileScreen: View {
     
     @EnvironmentObject var appState: AppState
     
+    @StateObject var viewModel = ProfileScreenViewModel()
+    
     init() {
         UIPageControl.appearance().isHidden = true
     }
@@ -18,18 +20,29 @@ struct ProfileScreen: View {
                     ZStack(alignment: .top) {
                         
                         VStack(spacing: 16) {
-                            ProfileImage()
-                            
-                            VStack(spacing: 16) {
+                            if(viewModel.showLoadingOnTheProfileSection) {
+                                ZStack {
+                                    TodoLoadingIndicator(size: 50).padding(50)
+                                }
+                            } else {
+                                ProfileImage()
+                                VStack(spacing: 16) {
+                                    
+                                    if let fullName = viewModel.profileInfo?.fullname {
+                                        Text(fullName)
+                                            .foregroundColor(.text)
+                                            .font(.custom(Typeface.medium, size: 18))
+                                    }
+                                    
+                                    if let email = viewModel.profileInfo?.email {
+                                        Text(email)
+                                            .accentColor(.text)
+                                            .foregroundColor(.text)
+                                            .font(.custom(Typeface.medium, size: 16))
+                                    }
+                                    
+                                }
                                 
-                                Text("FirstName LastName")
-                                    .foregroundColor(.text)
-                                    .font(.custom(Typeface.medium, size: 18))
-                                
-                                Text("test@test.com")
-                                    .accentColor(.text)
-                                    .foregroundColor(.text)
-                                    .font(.custom(Typeface.medium, size: 16))
                             }
                             
                         }
@@ -70,7 +83,7 @@ struct ProfileScreen: View {
                     
                     
                     VStack {
-                        Text("Statistics")
+                        Text(LocalizedStrings.statistics)
                             .foregroundColor(.text)
                             .font(.custom(Typeface.bold, size: 25))
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -82,8 +95,8 @@ struct ProfileScreen: View {
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             LazyHStack(spacing: 0) {
-                                ForEach(1...5, id: \.self) { index in
-                                    StatisticItem()
+                                ForEach(viewModel.stats, id: \.self) { stat in
+                                    StatisticItem(stat: stat)
                                         .padding(.vertical)
                                         .padding(.horizontal, 20)
                                         .containerRelativeFrame(.horizontal)

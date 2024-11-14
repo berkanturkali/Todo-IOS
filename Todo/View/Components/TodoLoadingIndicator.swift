@@ -4,7 +4,7 @@ import SwiftUI
 
 struct TodoLoadingIndicator: View {
     
-    var size: CGFloat = 100
+    var size: CGFloat = 60
     
     @State var isAnimating: Bool = false
     

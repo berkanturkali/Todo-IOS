@@ -55,7 +55,7 @@ struct HomeScreen: View {
                         } else {
                             TodoList(
                                 todos: viewModel.todos
-                            )                            
+                            )
                         }
                         
                     }

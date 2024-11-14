@@ -51,4 +51,34 @@ struct TodoService {
             throw error
         }
     }
+    
+    func fetchProfile() async throws ->  FetchProfileResponseModel {
+        let url = TodoServiceEndpoints.getStats
+        
+        do {
+            let response: BaseResponse<FetchProfileResponseModel> = try await networkManager.getRequest(
+                to: url,
+                responseType: BaseResponse<FetchProfileResponseModel>.self
+            )
+            
+            return response.data!
+        } catch {
+            throw error
+        }
+    }
+    
+    func fetchAllStats() async throws ->  [Stat] {
+        
+        let url = TodoServiceEndpoints.getAllStats
+        
+        do {
+            let response: BaseResponse<[Stat]> = try await networkManager.getRequest(
+                to: url,
+                responseType: BaseResponse<[Stat]>.self
+            )
+            return response.data ?? []
+        } catch {
+            throw error
+        }
+    }
 }

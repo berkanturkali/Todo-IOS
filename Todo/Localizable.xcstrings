@@ -4,16 +4,10 @@
     "" : {
 
     },
-    " Text %lld" : {
-
-    },
     "%@" : {
 
     },
     "😕" : {
-
-    },
-    "0" : {
 
     },
     "active" : {
@@ -152,8 +146,22 @@
         }
       }
     },
-    "Count" : {
-
+    "completed_statistic_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completed"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tamamlanmis"
+          }
+        }
+      }
     },
     "date" : {
       "extractionState" : "manual",
@@ -256,9 +264,6 @@
           }
         }
       }
-    },
-    "FirstName LastName" : {
-
     },
     "firstname_lastname_are_required" : {
       "extractionState" : "manual",
@@ -378,6 +383,12 @@
           }
         }
       }
+    },
+    "Key" : {
+      "extractionState" : "manual"
+    },
+    "Key 1" : {
+      "extractionState" : "manual"
     },
     "lastname" : {
       "extractionState" : "manual",
@@ -651,8 +662,22 @@
         }
       }
     },
-    "Statistics" : {
-
+    "statistics" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statistics"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Istatistikler"
+          }
+        }
+      }
     },
     "study" : {
       "extractionState" : "manual",
@@ -687,9 +712,6 @@
           }
         }
       }
-    },
-    "test@test.com" : {
-
     },
     "there_is_no_todo_found_for" : {
       "extractionState" : "manual",
@@ -742,8 +764,22 @@
         }
       }
     },
-    "Title" : {
-
+    "total_with_count" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total: %d"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toplam: %d"
+          }
+        }
+      }
     },
     "travel" : {
       "extractionState" : "manual",
