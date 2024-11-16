@@ -4,22 +4,37 @@ import SwiftUI
 
 struct EmptyViewForQuery: View {
     
-    let query: String
+    let category: String
+    
+    let filter: String
+    
+    @State var message = ""
     
     var body: some View {
         VStack(spacing: 12) {
             Text("😕")
                 .font(.title)
-            Text(String(format: LocalizedStrings.thereIsNoTodoFoundFor, query))
+            Text(message)
                 .font(.custom(Typeface.semibold, size: 18))
                 .foregroundColor(.text)
                 .multilineTextAlignment(.center)
                 .lineLimit(3)
                 .padding(.horizontal)
         }
+        .onAppear {
+            let deviceLanguage = Locale.current.language.languageCode?.identifier ?? "en"
+            if(deviceLanguage == "tr") {
+                message = String(format: LocalizedStrings.thereAreNoTodosFoundFor, category, filter)
+            } else {
+                message = String(format: LocalizedStrings.thereAreNoTodosFoundFor, filter, category)
+            }
+        }
     }
 }
 
 #Preview {
-    EmptyViewForQuery(query: Category.music.title)
+    EmptyViewForQuery(
+        category: Category.music.title,
+        filter: Filter.active.title
+    )
 }

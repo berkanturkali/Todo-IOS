@@ -46,10 +46,11 @@ struct HomeScreen: View {
                             Spacer()
                             TodoLoadingIndicator(size: 30)
                             Spacer()
-                        } else if(viewModel.showEmptyViewForTheCategory) {
+                        } else if(viewModel.showEmptyViewForCategoryAndFilter) {
                             Spacer()
                             EmptyViewForQuery(
-                                query: viewModel.selectedCategory.title
+                                category: viewModel.selectedCategory.title,
+                                filter: viewModel.selectedFilter.title
                             )
                             Spacer()
                         } else {

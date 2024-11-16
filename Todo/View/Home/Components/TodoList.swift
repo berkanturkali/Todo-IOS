@@ -10,10 +10,41 @@ struct TodoList: View {
     var body: some View {
         ScrollView() {
             LazyVStack {
-                ForEach(todos, id: \.self) { todo in
+                
+                ForEach(todos.indices, id: \.self) { index in
+                    let todo = todos[index]
+                    let sectionTitle = todo.formattedDate
+                    
+                    if index == 0 || sectionTitle != todos[index - 1].formattedDate {
+                        Text(sectionTitle)
+                            .font(
+                                .custom(
+                                    Typeface.bold,
+                                    size: 20
+                                )
+                            )
+                            .foregroundColor(
+                                .text
+                            )
+                            .frame(
+                                maxWidth: .infinity,
+                                alignment: .leading
+                            )
+                            .padding(
+                                .top,
+                                10
+                            )
+                            .padding(
+                                .horizontal,
+                                16
+                            )
+                        
+                    }
                     TodoItem(todo: todo)
                         .padding(.vertical, 10)
                         .padding(.horizontal, 2)
+                    
+                    
                 }
             }
         }

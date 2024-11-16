@@ -21,7 +21,7 @@ class HomeScreenViewModel: ObservableObject {
     
     @Published var errorMessage: String? = nil
     
-    @Published var showEmptyViewForTheCategory: Bool = false
+    @Published var showEmptyViewForCategoryAndFilter: Bool = false
     
     private let todoService = TodoService.shared
     
@@ -36,9 +36,9 @@ class HomeScreenViewModel: ObservableObject {
             .map({ $0.isEmpty })
             .sink { [weak self] isEmpty in
                 if(isEmpty) {
-                    let isAllCategory = self?.selectedCategory == .all
-                     self?.showEmptyView = isAllCategory
-                     self?.showEmptyViewForTheCategory = !isAllCategory
+                    let selectedCategoryAndFilterIsAll = self?.selectedCategory == .all && self?.selectedFilter == .all
+                     self?.showEmptyView = selectedCategoryAndFilterIsAll
+                     self?.showEmptyViewForCategoryAndFilter = !selectedCategoryAndFilterIsAll
                 }
             }
             .store(in: &cancellables)
@@ -62,7 +62,7 @@ class HomeScreenViewModel: ObservableObject {
     func fetchTodos() async {
         errorMessage = nil
         showEmptyView = false
-        showEmptyViewForTheCategory = false
+        showEmptyViewForCategoryAndFilter = false
         
         do {
             loading = true

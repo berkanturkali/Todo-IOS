@@ -7,6 +7,7 @@ struct MainScreen: View {
     init () {
         UITabBar.appearance().barTintColor = UIColor(Color.background)
         UITabBar.appearance().backgroundColor = UIColor(Color.background)
+        UITabBar.appearance().unselectedItemTintColor = UIColor(.text.opacity(0.7))
     }
     
     var body: some View {

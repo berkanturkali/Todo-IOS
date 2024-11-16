@@ -713,19 +713,19 @@
         }
       }
     },
-    "there_is_no_todo_found_for" : {
+    "there_are_no_todos_found_for" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "There is no todo found for ”%@”"
+            "value" : "There are no “%@” todos in ”%@” category."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "“%@” için bir sonuç bulunamadı."
+            "value" : "“%@” kategorisinde “%@”  bir todo bulunamadı."
           }
         }
       }
