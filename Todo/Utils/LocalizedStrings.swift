@@ -56,6 +56,10 @@ struct LocalizedStrings {
     
     static var totalWithCount: String { localizedString(for: "total_with_count") }
     
+    static var today: String { localizedString(for: "today") }
+    static var tomorrow: String { localizedString(for: "tomorrow") }
+    static var yesterday: String { localizedString(for: "yesterday") }
+    
     static func localizedString(for key: String) -> String {
         return NSLocalizedString(key, comment: "")
     }

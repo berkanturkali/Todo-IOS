@@ -40,11 +40,11 @@ struct Todo: Hashable, Codable {
         let dateComponents = calendar.dateComponents([.year, .month, .day], from: mDate)
         
         if(calendar.isDateInToday(mDate)){
-            return "Today"
+            return LocalizedStrings.today
         } else if(calendar.isDateInYesterday(mDate)) {
-            return "Yesterday"
+            return LocalizedStrings.yesterday
         } else if (calendar.isDateInTomorrow(mDate)){
-            return "Tomorrow"
+            return LocalizedStrings.tomorrow
         } else if(dateComponents.year == nowComponents.year && dateComponents.month == nowComponents.month) {
             let dateFormatter = DateFormatter()
             
