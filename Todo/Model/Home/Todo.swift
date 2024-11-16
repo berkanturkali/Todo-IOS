@@ -18,6 +18,14 @@ struct Todo: Hashable, Codable {
         formatDate()
     }
     
+    var time: String {
+        let date = convertSecondsToDate()
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "HH:mm"
+        timeFormatter.timeZone = TimeZone.current
+        return timeFormatter.string(from: date)
+    }
+    
     private func convertSecondsToDate() -> Date {
         return Date(timeIntervalSince1970: date)
     }
@@ -57,7 +65,7 @@ struct Todo: Hashable, Codable {
         return Todo(
             _id: UUID().uuidString,
             category: Category.all.title,
-            date: 12312312,
+            date: 1731436620,
             todo: "Get Married",
             completed: true,
             important: true
