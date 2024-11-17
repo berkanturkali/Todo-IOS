@@ -9,6 +9,9 @@ struct TodoList: View {
     
     @State private var swipedItemId: String? = "-1"
     
+    let onCompleteUndoButtonPressed : (Todo) -> Void
+    let onDeletebuttonPressed: (Todo) -> Void
+    
     var body: some View {
         ScrollView() {
             LazyVStack {
@@ -44,10 +47,22 @@ struct TodoList: View {
                     
                     
                     
-                    TodoItem(index: index, todo: todo, swipedItemId: $swipedItemId)
+                    TodoItem(
+                        index: index,
+                        todo: todo,
+                        swipedItemId: $swipedItemId,
+                        onCompleteUndoButtonPressed: {
+                            onCompleteUndoButtonPressed(
+                                todo
+                            )
+                        }) {
+                            onDeletebuttonPressed(
+                                todo
+                            )
+                        }
                         .padding(.vertical, 10)
                         .padding(.horizontal, 2)
-       
+                    
                 }
                 
                 
@@ -71,10 +86,18 @@ struct TodoList: View {
     ZStack {
         Color.background.ignoresSafeArea()
         TodoList(
-            todos: (1...5).map(
+            todos: (
+                1...5
+            )
+            .map(
                 { i in
                     Todo.mockTodo
-                })
-        )
+                }),
+            onCompleteUndoButtonPressed: { todo in
+                
+            }
+        ) {
+            todo in
+        }
     }
 }

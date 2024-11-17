@@ -37,11 +37,12 @@ struct NetworkManager {
         }
     }
     
-    func getRequest<U:Codable> (
+    func requestWithoutBody<U:Codable> (
         to url: String,
-        responseType: U.Type
+        responseType: U.Type,
+        method: HttpMethod = .GET
     ) async throws -> U {
-        return try await request(to: url, method: HttpMethod.GET, body: nil as Never?, responseType: responseType)
+        return try await request(to: url, method: method, body: nil as Never?, responseType: responseType)
     }
     
     

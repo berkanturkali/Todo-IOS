@@ -625,23 +625,6 @@
         }
       }
     },
-    "redo" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Redo"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Geri Al"
-          }
-        }
-      }
-    },
     "retry" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -876,6 +859,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Seyahat"
+          }
+        }
+      }
+    },
+    "undo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Undo"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Geri Al"
           }
         }
       }

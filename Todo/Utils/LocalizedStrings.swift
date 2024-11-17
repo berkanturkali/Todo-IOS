@@ -63,7 +63,7 @@ struct LocalizedStrings {
         localizedString(for: "complete")
     }
     
-    static var redo: String {localizedString(for: "redo") }
+    static var undo: String {localizedString(for: "undo") }
     
     static var delete: String { localizedString(for: "delete") }
     static func localizedString(for key: String) -> String {

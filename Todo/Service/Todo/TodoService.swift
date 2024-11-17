@@ -41,7 +41,7 @@ struct TodoService {
         ]
         
         do {
-            let response: BaseResponse<[Todo]> = try await networkManager.getRequest(
+            let response: BaseResponse<[Todo]> = try await networkManager.requestWithoutBody(
                 to: urlComponents.url!.absoluteString,
                 responseType: BaseResponse<[Todo]>.self
             )
@@ -56,7 +56,7 @@ struct TodoService {
         let url = TodoServiceEndpoints.getStats
         
         do {
-            let response: BaseResponse<FetchProfileResponseModel> = try await networkManager.getRequest(
+            let response: BaseResponse<FetchProfileResponseModel> = try await networkManager.requestWithoutBody(
                 to: url,
                 responseType: BaseResponse<FetchProfileResponseModel>.self
             )
@@ -72,7 +72,7 @@ struct TodoService {
         let url = TodoServiceEndpoints.getAllStats
         
         do {
-            let response: BaseResponse<[Stat]> = try await networkManager.getRequest(
+            let response: BaseResponse<[Stat]> = try await networkManager.requestWithoutBody(
                 to: url,
                 responseType: BaseResponse<[Stat]>.self
             )
@@ -80,5 +80,22 @@ struct TodoService {
         } catch {
             throw error
         }
+    }
+    
+    func updateCompleteStatus(id: String, completed: Bool) async throws -> BaseResponse<Todo> {
+        let url = Constants.baseUrl + TodoServiceEndpoints.todoPath + id + "/\(!completed)"
+        
+        do {
+            let response: BaseResponse<Todo> = try await networkManager.requestWithoutBody(
+                to: url,
+                responseType: BaseResponse<Todo>.self,
+                method: HttpMethod.PUT
+            )
+            
+            return response
+        } catch {
+            throw error
+        }
+        
     }
 }

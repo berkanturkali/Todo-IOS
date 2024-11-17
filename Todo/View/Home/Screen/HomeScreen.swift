@@ -7,7 +7,7 @@ struct HomeScreen: View {
     @StateObject var viewModel = HomeScreenViewModel()
     
     @State private var showFilterScreen = false
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -46,7 +46,7 @@ struct HomeScreen: View {
                             Spacer()
                             TodoLoadingIndicator(size: 30)
                             Spacer()
-                        } else if(viewModel.showEmptyViewForCategoryAndFilter) {
+                        } else if (viewModel.showEmptyViewForCategoryAndFilter) {
                             Spacer()
                             EmptyViewForQuery(
                                 category: viewModel.selectedCategory.title,
@@ -55,11 +55,19 @@ struct HomeScreen: View {
                             Spacer()
                         } else {
                             TodoList(
-                                todos: viewModel.todos
-                            )
+                                todos: viewModel.todos, onCompleteUndoButtonPressed: { todo in
+                                    Task {
+                                        await viewModel.updateCompleteStatus(todo: todo)
+                                    }
+                                }) { todo in
+                                    
+                                }
+                            
                         }
-                        
                     }
+                    .blurOnAlert(
+                        isAlertVisible: viewModel.loading || viewModel.showCompleteTodoStatusDialog
+                    )
                     .fullScreenCover(isPresented: $showFilterScreen) {
                         FiltersScreen(
                             appliedFilter: viewModel.selectedFilter,
@@ -67,9 +75,16 @@ struct HomeScreen: View {
                         )
                     }
                 }
-                
             }
-            .blurOnAlert(isAlertVisible: viewModel.loading)
+        }
+        .overlay {
+            TodoDialog(
+                message: viewModel.updateCompleteStatusMessage,
+                isVisible: $viewModel.showCompleteTodoStatusDialog,
+                onOkayButtonClick: {
+                    viewModel.updateCompleteStatusMessage = ""
+                }
+            )
         }
     }
 }

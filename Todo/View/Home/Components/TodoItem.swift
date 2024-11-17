@@ -12,12 +12,15 @@ struct TodoItem: View {
     @State private var dragThreshold: CGFloat = 50
     @State private var maxButtonHeight: CGFloat = 0
     
+    let onCompleteUndoButtonPressed : () -> Void
+    let onDeletebuttonPressed: () -> Void
+    
     var body: some View {
         ZStack {
             
             HStack(spacing: 16) {
                 Text(
-                    todo.completed ? LocalizedStrings.redo : LocalizedStrings.complete
+                    todo.completed ? LocalizedStrings.undo : LocalizedStrings.complete
                 )
                 .padding(.vertical)
                 .font(.custom(Typeface.semibold, size: 10))
@@ -32,6 +35,9 @@ struct TodoItem: View {
                             maxButtonHeight = geometry.size.height
                         }
                 })
+                .onTapGesture {
+                    onCompleteUndoButtonPressed()
+                }
                 
                 
                 Text(LocalizedStrings.delete)
@@ -49,11 +55,12 @@ struct TodoItem: View {
             .background(GeometryReader { geometry in
                 Color.clear
                     .onAppear {
-                        
                         actionWidth = geometry.size.width
                     }
             })
-            
+            .onTapGesture {
+                onDeletebuttonPressed()
+            }
             .offset(x: max(offsetX + actionWidth, 0))
             .animation(.easeInOut(duration: 0.3), value: offsetX)
             .frame(maxWidth: .infinity, alignment: .trailing)

@@ -7,7 +7,7 @@ struct Todo: Hashable, Codable {
     let category: String
     let date: Double
     let todo: String
-    let completed: Bool
+    var completed: Bool
     let important: Bool
     
     var categoryEnum: Category {

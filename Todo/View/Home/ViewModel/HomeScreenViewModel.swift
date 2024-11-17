@@ -23,6 +23,10 @@ class HomeScreenViewModel: ObservableObject {
     
     @Published var showEmptyViewForCategoryAndFilter: Bool = false
     
+    @Published var updateCompleteStatusMessage: String = ""
+    
+    @Published var showCompleteTodoStatusDialog: Bool = false
+    
     private let todoService = TodoService.shared
     
     private var cancellables = Set<AnyCancellable>()
@@ -37,8 +41,8 @@ class HomeScreenViewModel: ObservableObject {
             .sink { [weak self] isEmpty in
                 if(isEmpty) {
                     let selectedCategoryAndFilterIsAll = self?.selectedCategory == .all && self?.selectedFilter == .all
-                     self?.showEmptyView = selectedCategoryAndFilterIsAll
-                     self?.showEmptyViewForCategoryAndFilter = !selectedCategoryAndFilterIsAll
+                    self?.showEmptyView = selectedCategoryAndFilterIsAll
+                    self?.showEmptyViewForCategoryAndFilter = !selectedCategoryAndFilterIsAll
                 }
             }
             .store(in: &cancellables)
@@ -46,9 +50,18 @@ class HomeScreenViewModel: ObservableObject {
         Publishers.CombineLatest($selectedCategory, $selectedFilter)
             .sink { [weak self] (category, filter) in
                 self?.loading = true
-	                Task {
+                Task {
                     await self?.fetchTodos()
                 }
+            }
+            .store(in: &cancellables)
+        
+        $updateCompleteStatusMessage
+            .map { message in
+                !message.isEmpty
+            }
+            .sink{ [weak self] show in
+                self?.showCompleteTodoStatusDialog = show
             }
             .store(in: &cancellables)
         
@@ -81,6 +94,32 @@ class HomeScreenViewModel: ObservableObject {
     func resetQueryParams() {
         selectedFilter = .all
         selectedCategory = .all
+    }
+    
+    func updateCompleteStatus(todo: Todo) async {
+        do {
+            loading = true
+            let response = try await todoService.updateCompleteStatus(
+                id: todo._id,
+                completed: todo.completed
+            )
+            
+            updateCompleteStatusMessage = response.message!
+            updateListWithUpdatedItem(item: response.data!)
+            
+        } catch {
+            updateCompleteStatusMessage = NetworkManager.shared.handleNetworkError(error as! NetworkError)
+        }
+        
+        loading = false
+    }
+    
+    private func updateListWithUpdatedItem(item : Todo) {
+        let indexOfItem = todos.firstIndex(where: { $0._id == item._id})!
+        var updatedItem = todos[indexOfItem]
+        updatedItem.completed = !item.completed
+        todos[indexOfItem] = updatedItem
+        todos = todos
     }
     
 }
