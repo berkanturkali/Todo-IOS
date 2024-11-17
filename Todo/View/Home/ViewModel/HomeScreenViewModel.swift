@@ -23,9 +23,9 @@ class HomeScreenViewModel: ObservableObject {
     
     @Published var showEmptyViewForCategoryAndFilter: Bool = false
     
-    @Published var updateCompleteStatusMessage: String = ""
+    @Published var infoMessage: String = ""
     
-    @Published var showCompleteTodoStatusDialog: Bool = false
+    @Published var showInfoDialog: Bool = false
     
     private let todoService = TodoService.shared
     
@@ -56,14 +56,13 @@ class HomeScreenViewModel: ObservableObject {
             }
             .store(in: &cancellables)
         
-        $updateCompleteStatusMessage
-            .map { message in
-                !message.isEmpty
-            }
-            .sink{ [weak self] show in
-                self?.showCompleteTodoStatusDialog = show
-            }
-            .store(in: &cancellables)
+        $infoMessage.map({ message in
+            !message.isEmpty
+        })
+        .sink{ [weak self] show in
+            self?.showInfoDialog = show
+        }
+        .store(in: &cancellables)
         
     }
     
@@ -104,13 +103,27 @@ class HomeScreenViewModel: ObservableObject {
                 completed: todo.completed
             )
             
-            updateCompleteStatusMessage = response.message!
+            infoMessage = response.message!
             updateListWithUpdatedItem(item: response.data!)
             
         } catch {
-            updateCompleteStatusMessage = NetworkManager.shared.handleNetworkError(error as! NetworkError)
+            errorMessage = NetworkManager.shared.handleNetworkError(error as! NetworkError)
         }
         
+        loading = false
+    }
+    
+    func deleteTodo(todo: Todo) async {
+        do {
+            loading = true
+            let response = try await todoService.deleteTodo(id: todo._id)
+            
+            infoMessage = response.message!
+            deleteTheItemFromList(item: todo)
+            
+        } catch {
+            errorMessage = NetworkManager.shared.handleNetworkError(error as! NetworkError)
+        }
         loading = false
     }
     
@@ -120,6 +133,15 @@ class HomeScreenViewModel: ObservableObject {
         updatedItem.completed = !item.completed
         todos[indexOfItem] = updatedItem
         todos = todos
+    }
+    
+    private func deleteTheItemFromList(item: Todo) {
+        let indexOfItem = todos.firstIndex { todo in
+            todo._id == item._id
+        }
+        todos.remove(at: indexOfItem!)
+        todos = todos
+        
     }
     
 }

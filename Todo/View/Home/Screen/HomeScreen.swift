@@ -60,13 +60,15 @@ struct HomeScreen: View {
                                         await viewModel.updateCompleteStatus(todo: todo)
                                     }
                                 }) { todo in
-                                    
+                                    Task {
+                                        await viewModel.deleteTodo(todo: todo)
+                                    }
                                 }
                             
                         }
                     }
                     .blurOnAlert(
-                        isAlertVisible: viewModel.loading || viewModel.showCompleteTodoStatusDialog
+                        isAlertVisible: viewModel.loading || viewModel.showInfoDialog
                     )
                     .fullScreenCover(isPresented: $showFilterScreen) {
                         FiltersScreen(
@@ -79,10 +81,10 @@ struct HomeScreen: View {
         }
         .overlay {
             TodoDialog(
-                message: viewModel.updateCompleteStatusMessage,
-                isVisible: $viewModel.showCompleteTodoStatusDialog,
+                message: viewModel.infoMessage,
+                isVisible: $viewModel.showInfoDialog,
                 onOkayButtonClick: {
-                    viewModel.updateCompleteStatusMessage = ""
+                    viewModel.infoMessage = ""
                 }
             )
         }

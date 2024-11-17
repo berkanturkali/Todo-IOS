@@ -98,4 +98,18 @@ struct TodoService {
         }
         
     }
+    
+    func deleteTodo(id: String) async throws -> BaseResponse<Todo> {
+        let url = Constants.baseUrl + TodoServiceEndpoints.todoPath + id
+        do {
+            let response: BaseResponse<Todo> = try await networkManager.requestWithoutBody(
+                to: url,
+                responseType: BaseResponse<Todo>.self,
+                method: HttpMethod.DELETE
+            )
+            return response
+        } catch {
+            throw error
+        }
+    }
 }
