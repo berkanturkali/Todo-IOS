@@ -59,7 +59,13 @@ struct LocalizedStrings {
     static var today: String { localizedString(for: "today") }
     static var tomorrow: String { localizedString(for: "tomorrow") }
     static var yesterday: String { localizedString(for: "yesterday") }
+    static var complete: String {
+        localizedString(for: "complete")
+    }
     
+    static var redo: String {localizedString(for: "redo") }
+    
+    static var delete: String { localizedString(for: "delete") }
     static func localizedString(for key: String) -> String {
         return NSLocalizedString(key, comment: "")
     }

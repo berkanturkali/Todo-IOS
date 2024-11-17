@@ -129,6 +129,23 @@
         }
       }
     },
+    "complete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Complete"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tamamlandi"
+          }
+        }
+      }
+    },
     "completed" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -197,8 +214,22 @@
         }
       }
     },
-    "Delete" : {
-
+    "delete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sil"
+          }
+        }
+      }
     },
     "email" : {
       "extractionState" : "manual",
@@ -424,9 +455,6 @@
         }
       }
     },
-    "Mark \nas\n Completed" : {
-
-    },
     "music" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -593,6 +621,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Profil"
+          }
+        }
+      }
+    },
+    "redo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Redo"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geri Al"
           }
         }
       }

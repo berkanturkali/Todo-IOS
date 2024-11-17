@@ -16,23 +16,25 @@ struct TodoItem: View {
         ZStack {
             
             HStack(spacing: 16) {
-                Text("Mark \nas\n Completed")
-                    .padding(.vertical)
-                    .font(.custom(Typeface.semibold, size: 10))
-                    .cornerRadius(8)
-                    .padding(.horizontal)
-                    .modifier(BackgroundModifier(radius: 10, shadowX: 4, shadowY: 4))
-                    .foregroundColor(.text)
-                    .multilineTextAlignment(.center)
-                    .background(GeometryReader { geometry in
-                        Color.clear
-                            .onAppear {
-                                maxButtonHeight = geometry.size.height
-                            }
-                    })
+                Text(
+                    todo.completed ? LocalizedStrings.redo : LocalizedStrings.complete
+                )
+                .padding(.vertical)
+                .font(.custom(Typeface.semibold, size: 10))
+                .cornerRadius(8)
+                .padding(.horizontal)
+                .modifier(BackgroundModifier(radius: 10, shadowX: 4, shadowY: 4))
+                .foregroundColor(.text)
+                .multilineTextAlignment(.center)
+                .background(GeometryReader { geometry in
+                    Color.clear
+                        .onAppear {
+                            maxButtonHeight = geometry.size.height
+                        }
+                })
                 
                 
-                Text("Delete")
+                Text(LocalizedStrings.delete)
                     .padding(.vertical)
                     .font(.custom(Typeface.semibold, size: 10))
                     .cornerRadius(8)
@@ -104,12 +106,17 @@ struct TodoItem: View {
             .offset(x: swipedItemId == todo._id ? -actionWidth : 0)
         }
         .onAppear {
-            if swipedItemId == todo._id {
-                offsetX = -actionWidth
-                showButtons = true
-            } else {
-                offsetX = 0
-                showButtons = false
+            
+            Task {
+                try? await Task.sleep(for: .seconds(0.09))
+                if swipedItemId == todo._id {
+                    offsetX = -actionWidth
+                    showButtons = true
+                } else {
+                    offsetX = 0
+                    showButtons = false
+                }
+                
             }
         }
         .simultaneousGesture(
