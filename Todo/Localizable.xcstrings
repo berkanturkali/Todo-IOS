@@ -197,6 +197,9 @@
         }
       }
     },
+    "Delete" : {
+
+    },
     "email" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -387,9 +390,6 @@
     "Key" : {
       "extractionState" : "manual"
     },
-    "Key 1" : {
-      "extractionState" : "manual"
-    },
     "lastname" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -423,6 +423,9 @@
           }
         }
       }
+    },
+    "Mark \nas\n Completed" : {
+
     },
     "music" : {
       "extractionState" : "manual",
