@@ -34,6 +34,7 @@ struct HomeScreen: View {
                     VStack(spacing: 8) {
                         HomeScreenTopBar(
                             showFilterScreen: $showFilterScreen,
+                            showDeleteOptions: $viewModel.showDeleteOptions,
                             showBadgeOnTheFilterButton: viewModel.showBadgeOnTheFilterButton
                         ) {
                             Task {
@@ -76,6 +77,11 @@ struct HomeScreen: View {
                             onCheckMarkTapped: viewModel.onCheckMarkTapped
                         )
                     }
+                    .fullScreenCover(isPresented: $viewModel.showDeleteOptions) {
+                        DeleteOptionsScreen() { option in
+                            viewModel.selectedDeleteOption = option
+                        }
+                    }
                 }
             }
         }
@@ -87,6 +93,7 @@ struct HomeScreen: View {
                     viewModel.infoMessage = ""
                 }
             )
+            
         }
     }
 }

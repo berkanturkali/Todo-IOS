@@ -27,6 +27,10 @@ class HomeScreenViewModel: ObservableObject {
     
     @Published var showInfoDialog: Bool = false
     
+    @Published var showDeleteOptions: Bool = false
+    
+    @Published var selectedDeleteOption: DeleteOptions? = nil
+    
     private let todoService = TodoService.shared
     
     private var cancellables = Set<AnyCancellable>()
@@ -63,6 +67,27 @@ class HomeScreenViewModel: ObservableObject {
             self?.showInfoDialog = show
         }
         .store(in: &cancellables)
+        
+        $selectedDeleteOption
+            .filter({
+                return $0 != nil
+            })
+            .sink { [weak self] option  in
+
+                switch option {
+                case .deleteAll:
+                    Task {
+                        await self?.deleteAllTodos()
+                    }
+                case .deleteAllCompleted:  Task {
+                    await self?.deleteCompletedTodos()
+                }
+                    
+                case .none: break
+                }
+                
+            }
+            .store(in: &cancellables)
         
     }
     
@@ -127,6 +152,22 @@ class HomeScreenViewModel: ObservableObject {
         loading = false
     }
     
+    func deleteCompletedTodos() async {
+        do {
+            loading = true
+            let response = try await todoService.deleteCompletedTodos()
+            
+            infoMessage = response
+            
+            deleteCompletedTodosFromList()
+  
+            
+        } catch {
+            infoMessage = NetworkManager.shared.handleNetworkError(error as! NetworkError)
+        }
+        loading = false
+    }
+    
     private func updateListWithUpdatedItem(item : Todo) {
         let indexOfItem = todos.firstIndex(where: { $0._id == item._id})!
         var updatedItem = todos[indexOfItem]
@@ -143,5 +184,28 @@ class HomeScreenViewModel: ObservableObject {
         todos = todos
         
     }
+    
+    private func deleteCompletedTodosFromList() {
+        todos.removeAll(where: { $0.completed })
+        todos = todos
+    }
+    
+    private func deleteAllTodos() async {
+        do {
+            loading = true
+            
+            let response = try await todoService.deleteAllTodos()            
+            
+            infoMessage = response
+            
+            await fetchTodos()
+        
+        } catch {
+            infoMessage = NetworkManager.shared.handleNetworkError(error as! NetworkError)
+        }
+        
+        loading = false
+    }
+    
     
 }

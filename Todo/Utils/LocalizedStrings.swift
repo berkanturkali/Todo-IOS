@@ -66,6 +66,12 @@ struct LocalizedStrings {
     static var undo: String {localizedString(for: "undo") }
     
     static var delete: String { localizedString(for: "delete") }
+    static var deleteAll: String { localizedString(for: "delete_all") }
+    static var deleteCompletedTodos: String { localizedString(for: "delete_completed") }
+    static var options: String { localizedString(for: "options") }
+    static var done: String { localizedString(for: "done") }
+    
+    
     static func localizedString(for key: String) -> String {
         return NSLocalizedString(key, comment: "")
     }

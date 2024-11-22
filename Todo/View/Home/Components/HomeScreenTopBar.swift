@@ -6,6 +6,8 @@ struct HomeScreenTopBar: View {
     
     @Binding var showFilterScreen: Bool
     
+    @Binding var showDeleteOptions : Bool
+    
     let showBadgeOnTheFilterButton: Bool
     
     let refreshHomeScreen: () -> Void
@@ -13,6 +15,11 @@ struct HomeScreenTopBar: View {
     var body: some View {
         VStack {
             HStack(spacing: 12) {
+                Image(systemName: "trash.square")
+                    .onTapGesture {
+                        showDeleteOptions = true
+                    }
+                
                 NavigationLink {
                     AddTodoScreen() { refresh in
                         if(refresh) {
@@ -49,6 +56,10 @@ struct HomeScreenTopBar: View {
         showFilterScreen: .constant(
             false
         ),
+        showDeleteOptions:
+                .constant(
+                    false
+                ),
         showBadgeOnTheFilterButton: false
     ) {
         

@@ -13,4 +13,8 @@ struct TodoServiceEndpoints {
     static let getStats = Constants.baseUrl + todoPath + "stats/"
     
     static let getAllStats = Constants.baseUrl + todoPath + "allStats/"
+    
+    static let deleteCompletedTodos = Constants.baseUrl + todoPath + "delete-completed-todos"
+    
+    static let deleteAllTodos = Constants.baseUrl + todoPath + "delete-all-todos"
 }

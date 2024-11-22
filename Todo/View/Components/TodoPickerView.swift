@@ -4,7 +4,7 @@ import SwiftUI
 
 struct TodoPickerView: View {
     
-    @State var selectedValue: String
+    @State var selectedValue: String?
     
     @State private var pickerOffset: CGFloat = UIScreen.main.bounds.height
     
@@ -14,7 +14,7 @@ struct TodoPickerView: View {
     
     let options: [String]
     
-    let onDoneButtonPressed: (String) -> Void
+    let onDoneButtonPressed: (String?) -> Void
     
     var body: some View {
         if isVisible {

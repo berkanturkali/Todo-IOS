@@ -90,7 +90,6 @@ struct ProfileScreen: View {
                         
                         Divider()
                         
-                        
                         Spacer()
                         
                         ScrollView(.horizontal, showsIndicators: false) {

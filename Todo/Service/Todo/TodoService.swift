@@ -112,4 +112,35 @@ struct TodoService {
             throw error
         }
     }
+    
+    func deleteCompletedTodos() async throws -> String {
+        let url = TodoServiceEndpoints.deleteCompletedTodos
+        
+        do {
+            let response: BaseResponse<NoData> = try await networkManager.requestWithoutBody(
+                to: url,
+                responseType: BaseResponse<NoData>.self,
+                method: .DELETE
+            )
+            return response.message!
+        } catch {
+            throw error
+        }
+    }
+    
+    func deleteAllTodos() async throws -> String {
+        let url = TodoServiceEndpoints.deleteAllTodos
+        
+        do {
+            let response: BaseResponse<NoData> = try await networkManager.requestWithoutBody(
+                to: url,
+                responseType: BaseResponse<NoData>.self,
+                method: .DELETE
+            )
+            
+            return response.message!
+        } catch {
+            throw error
+        }
+    }
 }
