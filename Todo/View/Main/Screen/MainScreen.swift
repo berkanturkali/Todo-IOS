@@ -4,6 +4,8 @@ import SwiftUI
 
 struct MainScreen: View {
     
+    @EnvironmentObject var appState: AppState
+    
     init () {
         UITabBar.appearance().barTintColor = UIColor(Color.background)
         UITabBar.appearance().backgroundColor = UIColor(Color.background)
@@ -16,7 +18,7 @@ struct MainScreen: View {
                 Color.background.ignoresSafeArea(.all)
                 TabView {
                     NavigationView {
-                        HomeScreen()
+                        HomeScreen(appState: appState)
                     }.tabItem {
                         Image(
                             systemName: "house.fill"

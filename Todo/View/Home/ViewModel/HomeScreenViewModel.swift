@@ -6,6 +6,7 @@ import Combine
 @MainActor
 class HomeScreenViewModel: ObservableObject {
     
+    private var appState: AppState
     
     @Published var selectedCategory: Category = .all
     
@@ -35,7 +36,8 @@ class HomeScreenViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     
-    init() {
+    init(appState: AppState) {
+        self.appState = appState
         setupBindings()
     }
     
@@ -47,6 +49,9 @@ class HomeScreenViewModel: ObservableObject {
                     let selectedCategoryAndFilterIsAll = self?.selectedCategory == .all && self?.selectedFilter == .all
                     self?.showEmptyView = selectedCategoryAndFilterIsAll
                     self?.showEmptyViewForCategoryAndFilter = !selectedCategoryAndFilterIsAll
+                }
+                DispatchQueue.main.async {
+                    self?.appState.fetchAllStats = true
                 }
             }
             .store(in: &cancellables)
@@ -73,7 +78,7 @@ class HomeScreenViewModel: ObservableObject {
                 return $0 != nil
             })
             .sink { [weak self] option  in
-
+                
                 switch option {
                 case .deleteAll:
                     Task {
@@ -160,7 +165,7 @@ class HomeScreenViewModel: ObservableObject {
             infoMessage = response
             
             deleteCompletedTodosFromList()
-  
+            
             
         } catch {
             infoMessage = NetworkManager.shared.handleNetworkError(error as! NetworkError)
@@ -194,12 +199,12 @@ class HomeScreenViewModel: ObservableObject {
         do {
             loading = true
             
-            let response = try await todoService.deleteAllTodos()            
+            let response = try await todoService.deleteAllTodos()
             
             infoMessage = response
             
             await fetchTodos()
-        
+            
         } catch {
             infoMessage = NetworkManager.shared.handleNetworkError(error as! NetworkError)
         }

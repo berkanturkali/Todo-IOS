@@ -4,9 +4,15 @@ import SwiftUI
 
 struct HomeScreen: View {
     
-    @StateObject var viewModel = HomeScreenViewModel()
+    @EnvironmentObject var appState: AppState
+    
+    @StateObject var viewModel: HomeScreenViewModel
     
     @State private var showFilterScreen = false
+    
+    init(appState: AppState) {
+        _viewModel = StateObject(wrappedValue: HomeScreenViewModel(appState: appState))
+    }
 
     var body: some View {
         NavigationStack {
@@ -100,7 +106,7 @@ struct HomeScreen: View {
 
 #Preview {
     NavigationStack {
-        HomeScreen()
+        HomeScreen(appState: AppState())
     }
 }
 

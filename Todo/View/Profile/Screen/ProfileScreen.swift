@@ -50,7 +50,7 @@ struct ProfileScreen: View {
                                 }
                                 
                             }
-                            .padding(.vertical, 30)
+                            .padding(.vertical, 20)
                             
                             Button(action: {
                                 UserDefaults.standard.removeObject(forKey: Constants.tokenKey)
@@ -137,6 +137,14 @@ struct ProfileScreen: View {
                         }
                         .padding(.top, 20)
                         .padding(.horizontal)
+                    }
+                    .onAppear {
+                        if(appState.fetchAllStats) {
+                            Task {
+                                await viewModel.fetchAllStats()
+                            }
+                            appState.fetchAllStats = false
+                        }
                     }
                     .frame(minHeight: proxy.size.height, alignment: .center)
                 }
