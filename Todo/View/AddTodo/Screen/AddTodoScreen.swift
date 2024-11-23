@@ -64,7 +64,7 @@ struct AddTodoScreen: View {
                         
                         TodoDatePicker(selectedDate: $viewModel.selectedDate)
                         
-                        TodoTimePicker(selectedTime: $viewModel.selectedTime)
+                        TodoTimePicker(selectedTime: $viewModel.selectedTime, timeRange: $viewModel.timeRange)
                         
                         SwitchSectionItem(label: LocalizedStrings.notifyMe, isOn: $viewModel.notifyMe)
                         
@@ -114,10 +114,8 @@ struct AddTodoScreen: View {
             ) { value in
                 switch viewModel.clickedItem {
                 case .categories:
-                    print("selected category  \(value)")
                     viewModel.selectedCategory = Category.allCases.first(where: { $0.title == value })!
                 case .importance:
-                    print("selected importance  \(value)")
                     viewModel.selectedImportance = Importance.allCases.first(where: { $0.value == value })!
                 case .none:
                     viewModel.selectedCategory = .all

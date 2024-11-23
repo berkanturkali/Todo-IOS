@@ -68,9 +68,7 @@ class HomeScreenViewModel: ObservableObject {
         $infoMessage.map({ message in
             !message.isEmpty
         })
-        .sink{ [weak self] show in
-            self?.showInfoDialog = show
-        }
+        .assign(to: \.showInfoDialog, on: self)
         .store(in: &cancellables)
         
         $selectedDeleteOption

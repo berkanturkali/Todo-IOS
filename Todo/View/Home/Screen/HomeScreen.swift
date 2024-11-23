@@ -74,9 +74,7 @@ struct HomeScreen: View {
                             
                         }
                     }
-                    .blurOnAlert(
-                        isAlertVisible: viewModel.loading || viewModel.showInfoDialog
-                    )
+      
                     .fullScreenCover(isPresented: $showFilterScreen) {
                         FiltersScreen(
                             appliedFilter: viewModel.selectedFilter,
@@ -90,6 +88,9 @@ struct HomeScreen: View {
                     }
                 }
             }
+            .blurOnAlert(
+                isAlertVisible: viewModel.loading || viewModel.showInfoDialog
+            )
         }
         .overlay {
             TodoDialog(

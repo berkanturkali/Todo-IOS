@@ -32,6 +32,8 @@ class AddTodoScreenViewModel: ObservableObject {
     
     @Published var isLoading: Bool = false
     
+    @Published var timeRange: ClosedRange<Date> = ClosedRange<Date>(uncheckedBounds: (lower: Date(), upper: Date()))
+    
     var refreshHomeScreen: Bool = false
     
     private var cancellables = Set<AnyCancellable>()
@@ -67,6 +69,12 @@ class AddTodoScreenViewModel: ObservableObject {
         $messageWithCallback
             .map { $0 != nil }
             .assign(to: \.showAlert, on: self)
+            .store(in: &cancellables)
+        
+        $selectedDate
+            .sink { [weak self] date in
+                self?.timeRange = self?.getTheTimeRange(for: date) ?? ClosedRange<Date>(uncheckedBounds: (lower: Date(), upper: Date()))
+            }
             .store(in: &cancellables)
         
     }
@@ -161,6 +169,20 @@ class AddTodoScreenViewModel: ObservableObject {
         notifyMe = false
         theTask = ""
         clickedItem = nil
+    }
+    
+   func getTheTimeRange(for date: Date) -> ClosedRange<Date> {
+        let calendar = Calendar.current
+        let startOfToday = calendar.startOfDay(for: date)
+        
+        if calendar.isDateInToday(date) {
+            let nextHalfHour = calendar.date(byAdding: .minute, value: 30, to: date)!
+            let endOfToday = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: startOfToday)!
+            return nextHalfHour...endOfToday
+        }
+        let startOfSelectedDate = calendar.startOfDay(for: date)
+        let endOfSelectedDate = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: startOfSelectedDate)!
+        return startOfSelectedDate...endOfSelectedDate
     }
     
 }

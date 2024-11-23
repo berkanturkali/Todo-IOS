@@ -6,12 +6,7 @@ struct TodoTimePicker: View {
     
     @Binding var selectedTime: Date
     
-    private var timeRange: ClosedRange<Date> {
-        let calendar = Calendar.current
-        let now = Date()
-        let endOfDay = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: now)!
-        return now...endOfDay
-    }
+    @Binding var timeRange: ClosedRange<Date>
     
     var body: some View {
         HStack {
@@ -46,8 +41,4 @@ struct TodoTimePicker: View {
         .modifier(BackgroundModifier(radius: 12, shadowX: 2, shadowY: 2))
         .padding(.horizontal, 6)
     }
-}
-
-#Preview {
-    TodoTimePicker(selectedTime: .constant(Date()))
 }
