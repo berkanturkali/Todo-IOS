@@ -171,15 +171,17 @@ class AddTodoScreenViewModel: ObservableObject {
         clickedItem = nil
     }
     
-   func getTheTimeRange(for date: Date) -> ClosedRange<Date> {
+    func getTheTimeRange(for date: Date) -> ClosedRange<Date> {
         let calendar = Calendar.current
         let startOfToday = calendar.startOfDay(for: date)
         
         if calendar.isDateInToday(date) {
             let nextHalfHour = calendar.date(byAdding: .minute, value: 30, to: date)!
             let endOfToday = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: startOfToday)!
-            return nextHalfHour...endOfToday
+            let effectiveEnd = min(nextHalfHour, endOfToday)
+            return date...effectiveEnd
         }
+        
         let startOfSelectedDate = calendar.startOfDay(for: date)
         let endOfSelectedDate = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: startOfSelectedDate)!
         return startOfSelectedDate...endOfSelectedDate
