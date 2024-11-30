@@ -12,6 +12,7 @@ struct SwitchSectionItem: View {
         Toggle(isOn: $isOn) {
             Text(label)
                 .font(.custom(Typeface.medium, size: 18))
+                .foregroundColor(.text)
         }
         .toggleStyle(
             .switch

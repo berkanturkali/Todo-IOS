@@ -13,6 +13,7 @@ struct DeleteOptionsTopBar: View {
                 Text(LocalizedStrings.options)
                     .font(.custom(Typeface.semibold, size: 20))
                     .frame(maxWidth: .infinity, alignment: .center)
+                    .foregroundColor(.text)
                 
                 HStack {
                     Text(LocalizedStrings.cancel)

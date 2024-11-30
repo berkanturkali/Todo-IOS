@@ -23,6 +23,7 @@ struct TodoTimePicker: View {
                         )
                     )
             }
+            .foregroundColor(.text)
             
             Spacer()
             DatePicker(
@@ -34,6 +35,7 @@ struct TodoTimePicker: View {
             .modifier(BackgroundModifier(radius: 12, shadowX: 2, shadowY: 2))
             .labelsHidden()
             .accentColor(.text)
+            .colorScheme(.light)
         }
         
         .padding(.horizontal, 24)

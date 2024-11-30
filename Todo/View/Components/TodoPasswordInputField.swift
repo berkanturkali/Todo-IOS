@@ -46,6 +46,7 @@ struct TodoPasswordInputField: View {
             .keyboardType(.default)
             .textContentType(.password)
             .accentColor(.text)
+            .foregroundColor(.text)
             
             if(!password.isEmpty) {
                 Button {

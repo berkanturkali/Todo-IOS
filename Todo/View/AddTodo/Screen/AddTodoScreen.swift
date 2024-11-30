@@ -28,6 +28,7 @@ struct AddTodoScreen: View {
                         .padding(.horizontal)
                         
                         Text(LocalizedStrings.addNewTodo)
+                            .foregroundColor(.text)
                             .font(.custom(Typeface.semibold, size: 20))
                             .frame(maxWidth: .infinity, alignment: .center)
                         
@@ -83,6 +84,7 @@ struct AddTodoScreen: View {
                                     .frame(height: 150)
                                     .modifier(BackgroundModifier(shadowX: 8, shadowY: 8))
                                     .accentColor(.text)
+                                    .foregroundColor(.text)
                                 
                                 Text(String(format: LocalizedStrings.xCharactersRemaining, (characterLimit - viewModel.theTask.count)))
                                     .font(.custom(Typeface.semibold, size: 12))

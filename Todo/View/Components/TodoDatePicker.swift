@@ -46,7 +46,9 @@ struct TodoDatePicker: View {
                             size: 18
                         )
                     )
+          
             }
+            .foregroundColor(.text)
             
             Spacer()
             DatePicker(
@@ -57,11 +59,13 @@ struct TodoDatePicker: View {
                 ),
                 displayedComponents: .date
             )
+
             .font(.custom(Typeface.black, size: 14))
             .modifier(BackgroundModifier(radius: 12, shadowX: 2, shadowY: 2))
       
             .labelsHidden()
             .accentColor(.text)
+            .colorScheme(.light)
         }
         .frame(maxWidth: .infinity, alignment: .trailing)
         .padding(.horizontal, 24)

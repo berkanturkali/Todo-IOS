@@ -37,7 +37,7 @@ struct TodoTextInputField: View {
             .font(.custom(Typeface.light, size: textSize))
             .autocapitalization(autoCapitalization)
             .keyboardType(keyboardType)
-            
+            .foregroundColor(.text)
             .accentColor(.text)
             
             if(!text.isEmpty) {

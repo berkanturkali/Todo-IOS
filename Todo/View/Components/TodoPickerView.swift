@@ -34,9 +34,11 @@ struct TodoPickerView: View {
                         
                         Text(title)
                             .padding(.horizontal)
+                            .foregroundColor(.text)
                             .background(Color.background)
                             .padding(.vertical)
                             .font(.custom(Typeface.semibold, size: 18))
+                           
 
                         Image(systemName: "checkmark")
                             .padding(.horizontal)
@@ -57,6 +59,7 @@ struct TodoPickerView: View {
                     
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+
                 }
                 .modifier(BackgroundModifier(radius: 18, shadowX: 8, shadowY: -12))
                 .onAppear {
@@ -80,7 +83,7 @@ struct TodoPickerView: View {
                 
             }
             .animation(.snappy, value: isVisible)
-            
+            .colorScheme(.light)
         }
     }
 }

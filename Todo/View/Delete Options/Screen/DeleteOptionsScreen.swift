@@ -14,9 +14,6 @@ struct DeleteOptionsScreen: View {
             
             VStack(spacing: 24) {
                 DeleteOptionsTopBar() {
-                    print(
-                        "on done button pressed selected option : \(selectedOption.value)"
-                    )
                     onDoneButtonPressed(selectedOption)
                 }
                     .padding(.top, 24)
@@ -30,7 +27,6 @@ struct DeleteOptionsScreen: View {
                         .padding(.vertical, 8)
                         .padding(.horizontal, selectedOption == option ? 30 : 0)
                         .onTapGesture {
-                            print("selected option : \(option.value)")
                             selectedOption = option
                         }
                         .scaleEffect(selectedOption == option ? 1.1 : 0.9)

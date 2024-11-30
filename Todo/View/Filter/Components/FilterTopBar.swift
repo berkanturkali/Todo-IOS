@@ -16,6 +16,7 @@ struct FilterTopBar: View {
                 Text(LocalizedStrings.filters)
                     .font(.custom(Typeface.semibold, size: 20))
                     .frame(maxWidth: .infinity, alignment: .center)
+                    .foregroundColor(.text)
                 HStack {
                     Text(LocalizedStrings.cancel)
                         .font(.custom(Typeface.medium, size: 15))

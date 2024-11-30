@@ -22,6 +22,7 @@ struct TodoSection<Content: View>: View {
                     .bold()
                 
                 Text(title)
+                    .foregroundColor(.text)
                     .font(
                         .custom(
                             Typeface.semibold,

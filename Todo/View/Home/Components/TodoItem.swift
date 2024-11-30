@@ -103,6 +103,7 @@ struct TodoItem: View {
                     Text(todo.time)
                         .font(.custom(Typeface.medium, size: 14))
                 }
+                .foregroundColor(.text)
                 .frame(maxWidth: .infinity)
             }
             .padding(.vertical)
