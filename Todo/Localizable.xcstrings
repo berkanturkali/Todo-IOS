@@ -339,12 +339,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ad"
+            "value" : "Firstname"
           }
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Firstname"
           }
         }
@@ -478,12 +478,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Soyad"
+            "value" : "Lastname"
           }
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Lastname"
           }
         }
@@ -812,13 +812,13 @@
         }
       }
     },
-    "there_are_no_todos_found_for" : {
+    "there_is_no_todo_found_for" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "There are no “%@” todos in ”%@” category."
+            "value" : "There is no “%@” todo in ”%@” category."
           }
         },
         "tr" : {

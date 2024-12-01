@@ -24,9 +24,9 @@ struct EmptyViewForQuery: View {
         .onAppear {
             let deviceLanguage = Locale.current.language.languageCode?.identifier ?? "en"
             if(deviceLanguage == "tr") {
-                message = String(format: LocalizedStrings.thereAreNoTodosFoundFor, category, filter)
+                message = String(format: LocalizedStrings.thereIsNoTodoFoundFor, category, filter)
             } else {
-                message = String(format: LocalizedStrings.thereAreNoTodosFoundFor, filter, category)
+                message = String(format: LocalizedStrings.thereIsNoTodoFoundFor, filter, category)
             }
         }
     }

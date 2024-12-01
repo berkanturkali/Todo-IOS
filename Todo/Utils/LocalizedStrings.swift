@@ -50,7 +50,7 @@ struct LocalizedStrings {
     static var addTodo: String { localizedString(for: "add_todo") }
     static var youCanStartByAddingNewTodo: String { localizedString(for: "you_can_start_by_adding_new_todo")  }
     static var retry: String { localizedString(for: "retry") }
-    static var thereAreNoTodosFoundFor: String { localizedString(for: "there_are_no_todos_found_for") }
+    static var thereIsNoTodoFoundFor: String { localizedString(for: "there_is_no_todo_found_for") }
     static var completedStatisticTitle: String { localizedString(for: "completed_statistic_title") }
     static var statistics: String { localizedString(for: "statistics") }
     

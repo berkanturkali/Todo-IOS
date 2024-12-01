@@ -1,2 +1,28 @@
 # Ignore environment-specific config files
 *.xcconfig
+
+# Xcode
+build/
+DerivedData/
+*.xcworkspace
+*.xcuserstate
+*.xccheckout
+*.xcuserdata/
+
+# Swift Package Manager
+/.build/
+Package.pins
+Package.resolved
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/
+Carthage/Build/
+
+# Other
+*.swp
+*.tmp
+*.DS_Store
